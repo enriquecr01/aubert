@@ -1,5 +1,5 @@
 <template>
-    <div class="grid grid-cols-1 gap-4" style="overflow-y:scroll; height:100vh; display:block;">
+    <div class="grid grid-cols-1 gap-4" style="overflow-y:scroll; height:96vh; display:block;">
         <Password v-for="(pass, index) in passwords" :key="index" :lang="language" :url="pass.url" :name="pass.name" :user="pass.user" />
     </div>
 
