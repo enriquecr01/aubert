@@ -1,10 +1,12 @@
 <template>
   <div class="flex flex-wrap bg-gray-100 w-full h-screen"> 
-    <div class="w-2/12 bg-white rounded p-3 shadow-lg">
-      <Menu @changeLanguage="selectedLang"/>
-    </div>
 
-    <div class="w-10/12">
+    <MenuBar @changeLanguage="selectedLang"/>
+    
+    <Menu @changeLanguage="selectedLang" />
+
+
+    <div class="lg:w-10/12 w-full">
         <div class="p-4 text-gray-500">
           <router-view v-slot="{ Component }">
               <component :is="Component" :language="language" />
@@ -18,16 +20,18 @@
 
 <script>
 import Menu from './components/menu.vue';
+import MenuBar from './components/menubar.vue';
 
 import './assets/tailwind.css';
 
 export default {
   components: {
-    Menu
+    Menu,
+    MenuBar
   },
   data() {
     return {
-      language: localStorage.getItem('language')
+      language: localStorage.getItem('language'),
     }
   },
   methods: {

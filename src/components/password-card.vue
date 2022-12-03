@@ -5,6 +5,7 @@
     <div class="flex flex-col">
       <strong class="text-slate-900 text-sm font-medium dark:text-slate-200">{{ name }}</strong>
       <span class="text-slate-500 text-sm font-medium dark:text-slate-400">{{ user }}</span>
+      <span>{{ copy }}</span>
     </div>
   </div>
 
