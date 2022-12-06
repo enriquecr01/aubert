@@ -2,7 +2,7 @@
       <div class="flex items-center space-x-4 p-2 mb-5">
       <img class="h-12 rounded-full" src="http://www.gravatar.com/avatar/2acfb745ecf9d4dccb3364752d17f65f?s=260&d=mp" alt="James Bhatta" />
       <div>
-        <h4 class="font-semibold text-lg text-gray-700 capitalize font-poppins tracking-wide">
+        <h4 class="font-semibold text-lg text-gray-300 capitalize font-poppins tracking-wide">
           James Bhatta
         </h4>
       </div>
@@ -23,8 +23,8 @@
     <ul class="space-y-2 text-sm">
       <li v-for="(item, index) in items" :key="index">
         <router-link :to="item.to">
-          <a class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 focus:shadow-outline" >
-            <span class="text-gray-600">
+          <a class="flex items-center space-x-3 text-gray-300 p-2 rounded-md font-medium hover:bg-gray-700 focus:shadow-outline" >
+            <span class="text-gray-200">
               <i :class="item.icon"></i>
             </span>
             <span>{{ item.label }}</span>

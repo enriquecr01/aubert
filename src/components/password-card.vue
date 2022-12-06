@@ -1,11 +1,11 @@
-<template style="display: inline-block;">
+<template>
 
-  <div class="flex items-center gap-4 p-4 border-solid border-2 border-sky-500">
+  <div class="flex items-center gap-4 p-4 hover:bg-yellow-500 hover:text-gray-50 text-gray-300">
     <img class="w-12 h-12 rounded-md" :src="`https://logo.clearbit.com/${ url }?size=40`">
     <div class="flex flex-col">
-      <strong class="text-slate-900 text-sm font-medium dark:text-slate-200">{{ name }}</strong>
-      <span class="text-slate-500 text-sm font-medium dark:text-slate-400">{{ user }}</span>
-      <span>{{ copy }}</span>
+      <strong class="text-sm font-medium">{{ name }}</strong>
+      <span class="text-sm font-medium">{{ user }}</span>
+      <!-- <span>{{ copy }}</span> -->
     </div>
   </div>
 

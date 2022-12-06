@@ -1,7 +1,8 @@
 <template>
-    <div class="grid grid-cols-1 gap-4" style="overflow-y:scroll; height:96vh; display:block;">
+    <div class="grid grid-cols-3 gap-4 block" style="overflow-y:scroll; height:96vh; display:block;">
         <Password v-for="(pass, index) in passwords" :key="index" :lang="language" :url="pass.url" :name="pass.name" :user="pass.user" />
     </div>
+
 
     <!-- <table id="customers" style="overflow-y:scroll; height:100vh; display:block;"> -->
         <!-- <tr v-for="(pass, index) in passwords" :key="index" > -->
@@ -139,4 +140,16 @@ export default {
 </script>
 
 <style scoped>
+div::-webkit-scrollbar {
+    width: .5em;
+}
+ 
+div::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+div::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background-color: rgba(17, 24, 39, 1);
+}
 </style>
