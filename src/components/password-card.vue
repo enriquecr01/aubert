@@ -1,46 +1,12 @@
 <template>
 
-  <div class="flex items-center gap-4 p-4 hover:bg-yellow-500 hover:text-gray-50 text-gray-300">
+  <div class="flex items-center gap-4 p-4 text-gray-300 rounded shadow-white1 hover:bg-yellow-500 hover:text-gray-50" @click="showPassword()">
     <img class="w-12 h-12 rounded-md" :src="`https://logo.clearbit.com/${ url }?size=40`">
     <div class="flex flex-col">
       <strong class="text-sm font-medium">{{ name }}</strong>
       <span class="text-sm font-medium">{{ user }}</span>
-      <!-- <span>{{ copy }}</span> -->
     </div>
   </div>
-
-  <!-- <Card>
-    <template #title>
-      <img :src="`https://logo.clearbit.com/${ url }?size=40`" />
-      {{ name }}
-    </template>
-    <template #subtitle>
-      <div>{{ user }}</div>
-      <Button
-        icon="pi pi-arrow-right"
-        class="p-button-rounded p-button-info p-button-outlined"
-        v-tooltip.top="gosite"
-      />
-      <Button
-        icon="pi pi-copy"
-        class="p-button-rounded p-button-secondary p-button-outlined"
-        v-tooltip.top="copy"
-        style="margin-left: 0.5em"
-      />
-      <Button
-        icon="pi pi-pencil"
-        class="p-button-rounded p-button-warning p-button-outlined"
-        v-tooltip.top="edit"
-        style="margin-left: 0.5em"
-      />
-      <Button
-        icon="pi pi-trash"
-        class="p-button-rounded p-button-danger p-button-outlined"
-        v-tooltip.top="deletepass"
-        style="margin-left: 0.5em"
-      />
-    </template>
-  </Card> -->
 
 </template>
 
@@ -49,6 +15,7 @@ import { getWord } from "../languages.js";
 
 export default {
   name: "PasswordCard",
+  emits: ['showPassword'],
   props: {
     lang: String,
     url: String,
@@ -74,6 +41,10 @@ export default {
       this.edit = getWord(this.selectedLang, "edit");
       this.deletepass = getWord(this.selectedLang, "delete");
     },
+    showPassword() {
+      this.$emit('showPassword', { url: this.url, name: this.name, user: this.user })
+      console.log('xd')
+    }
   },
   watch: {
     lang(newValue) {
@@ -85,4 +56,10 @@ export default {
 </script>
 
 <style>
+  .shadow-white1:hover {
+    box-shadow: 0px 0px 30px 5px rgba(130,130,130,0.77);
+    -webkit-box-shadow: 0px 0px 30px 5px rgba(130,130,130,0.77);
+    -moz-box-shadow: 0px 0px 30px 5px rgba(130,130,130,0.77);
+    transition: 0.5s;
+  }
 </style>

@@ -8,6 +8,7 @@ const languages = {
         gosite: 'Ir al sitio',
         edit: 'Editar',
         delete: 'Eliminar',
+        instructions: 'Haz clic en una contraseña',
     }, 
     EN: {
         passwords: 'Passwords',
@@ -18,6 +19,7 @@ const languages = {
         gosite: 'Go the site',
         edit: 'Edit',
         delete: 'Delete',
+        instructions: 'Click on a password',
     },
     FR: {
         passwords: 'Mots de passe',
@@ -28,6 +30,7 @@ const languages = {
         gosite: 'Aller sur le site',
         edit: 'Éditer',
         delete: 'Retirer',
+        instructions: 'Cliquez sur un mot de passe',
     }
 }
 
