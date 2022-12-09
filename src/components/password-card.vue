@@ -1,6 +1,6 @@
 <template>
 
-  <div class="flex items-center gap-4 p-4 text-gray-300 rounded shadow-white1 hover:bg-yellow-500 hover:text-gray-50" @click="showPassword()">
+  <div :class="`flex items-center gap-4 p-4 text-gray-300 rounded shadow-white1 hover:${ color } hover:text-gray-50`" @click="showPassword()">
     <img class="w-12 h-12 rounded-md" :src="`https://logo.clearbit.com/${ url }?size=40`">
     <div class="flex flex-col">
       <strong class="text-sm font-medium">{{ name }}</strong>
@@ -21,6 +21,7 @@ export default {
     url: String,
     name: String,
     user: String,
+    color: String
   },
   mounted() {
     this.selectedLang = localStorage.getItem("language");
@@ -42,8 +43,7 @@ export default {
       this.deletepass = getWord(this.selectedLang, "delete");
     },
     showPassword() {
-      this.$emit('showPassword', { url: this.url, name: this.name, user: this.user })
-      console.log('xd')
+      this.$emit('showPassword', { url: this.url, name: this.name, user: this.user, color: this.color })
     }
   },
   watch: {

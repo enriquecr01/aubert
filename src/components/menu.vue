@@ -1,5 +1,5 @@
 <template>
-  <div class="lg:w-2/12 md:w-0 bg-gray-900 text-slate-300 rounded p-3 shadow-lg hidden lg:block">
+  <div class="lg:w-2/12 md:w-0 bg-gray-900 text-slate-300  p-3 shadow-lg hidden lg:block">
     <PrintMenu @changeLanguage="selectedLang"/>
   </div>
 

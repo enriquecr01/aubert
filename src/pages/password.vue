@@ -1,10 +1,22 @@
 <template>
     <div :class="controlColumnsGrid">
-        <div class="bg-gray-700 shadow-white h-96vh" style="overflow-y:scroll;">
-            <Password v-for="(pass, index) in passwords" :key="index" :lang="language" :url="pass.url" :name="pass.name" :user="pass.user" @showPassword="putPassword" />
+        <div class="bg-gray-700 shadow-white h-96vh rounded" style="overflow-y:scroll;">
+            <Password v-for="(pass, index) in passwords" :key="index" :lang="language" :url="pass.url" :name="pass.name" :user="pass.user" :color="pass.color" @showPassword="putPassword" />
         </div>
-        <div class="grid h-screen place-items-center bg-gray-700 h-96vh">
-            {{ instructions }}
+        <div :class="[Object.keys(selectedPassword).length === 0 ? classInstructions : classSelected]">
+            <h3 v-if="Object.keys(selectedPassword).length === 0"> {{ instructions }} </h3>
+            <div v-if="Object.keys(selectedPassword).length > 0">
+                <div :class="`flex items-center gap-4 p-4 rounded ${ selectedPassword.color.replace('500', '800') } text-gray-50`" @click="showPassword()">
+                    <img class="rounded-md" :src="`https://logo.clearbit.com/${ selectedPassword.url  }?size=100`">
+                    <div class="flex flex-col">
+                        <strong class="text-3xl font-medium">{{ titleEdit }}</strong>
+                        <span class="text-3xl">{{ selectedPassword.name }}</span>
+                    </div>
+                </div>
+                <div class="p-10">
+                    XDDDD
+                </div>
+            </div>
         </div>
     </div>
 
@@ -30,121 +42,148 @@ export default {
     return {
         controlColumnsGrid: "grid grid-cols-2 gap-4 h-96vh",
         instructions: 'xd',
+        titleEdit: 'xd',
+        selectedPassword: {},
+        classSelected: 'bg-gray-700 h-96vh rounded',
+        classInstructions: 'grid h-screen place-items-center bg-gray-700 h-96vh rounded',
         passwords: [
             {
                 url: "spotify.com", 
                 name: "Spotify",
-                user: "turchu@live.com"
+                user: "turchu@live.com",
+                color: "bg-yellow-500",
             },
             {
                 url: "riot-games.com" ,
                 name: "Riot Games" ,
                 user: "ejemplo@live.com",
+                color: "bg-green-500",
             },
             {
                 url: "coppel.com",
                 name: "Coppel",
                 user: "libni@live.com",
+                color: "bg-blue-500",
             },
             {
                 url: "elrellano.com",
                 name: "El Rellano",
                 user: "chistoso@live.com",
+                color: "bg-purple-500",
             },
             {
                 url: "nintendo.com",
                 name: "Nintentdo",
                 user: "mario@live.com",
+                color: "bg-pink-500",
             },
             {
                 url: "twitter.com",
                 name: "Twitter",
-                user: "@pendejotron1235"
+                user: "@pendejotron1235",
+                color: "bg-indigo-500",
             },
             {
                 url: "instax.com",
                 name: "Instax",
-                user: "camaras@live.com"
+                user: "camaras@live.com",
+                color: "bg-red-500",
             },
             {
                 url: "spotify.com", 
                 name: "Spotify",
-                user: "turchu@live.com"
+                user: "turchu@live.com",
+                color: "bg-gray-500",
             },
             {
                 url: "riot-games.com" ,
                 name: "Riot Games" ,
                 user: "ejemplo@live.com",
+                color: "bg-yellow-500",
             },
             {
                 url: "coppel.com",
                 name: "Coppel",
                 user: "libni@live.com",
+                color: "bg-yellow-500",
             },
             {
                 url: "elrellano.com",
                 name: "El Rellano",
                 user: "chistoso@live.com",
+                color: "bg-yellow-500",
             },
             {
                 url: "nintendo.com",
                 name: "Nintentdo",
                 user: "mario@live.com",
+                color: "bg-yellow-500",
             },
             {
                 url: "twitter.com",
                 name: "Twitter",
-                user: "@pendejotron1235"
+                user: "@pendejotron1235",
+                color: "bg-yellow-500",
             },
             {
                 url: "instax.com",
                 name: "Instax",
-                user: "camaras@live.com"
+                user: "camaras@live.com",
+                color: "bg-yellow-500",
             },
             {
                 url: "spotify.com", 
                 name: "Spotify",
-                user: "turchu@live.com"
+                user: "turchu@live.com",
+                color: "bg-yellow-500",
             },
             {
                 url: "riot-games.com" ,
                 name: "Riot Games" ,
                 user: "ejemplo@live.com",
+                color: "bg-yellow-500",
             },
             {
                 url: "coppel.com",
                 name: "Coppel",
                 user: "libni@live.com",
+                color: "bg-yellow-500",
             },
             {
                 url: "elrellano.com",
                 name: "El Rellano",
                 user: "chistoso@live.com",
+                color: "bg-yellow-500",
             },
             {
                 url: "nintendo.com",
                 name: "Nintentdo",
                 user: "mario@live.com",
+                color: "bg-yellow-500",
             },
             {
                 url: "twitter.com",
                 name: "Twitter",
-                user: "@pendejotron1235"
+                user: "@pendejotron1235",
+                color: "bg-yellow-500",
             },
             {
                 url: "instax.com",
                 name: "Instax",
-                user: "camaras@live.com"
+                user: "camaras@live.com",
+                color: "bg-yellow-500",
             }
         ]
     };
   },
   methods: {
-    putPassword(xd) {
-        console.log(xd)
+    putPassword(pass) {
+        console.log(pass)
+        this.selectedPassword = pass;
     },
     setLanguage() {
       this.instructions = getWord(this.selectedLang, "instructions");
+      this.titleEdit= getWord(this.selectedLang, "titleEdit");
     },
   },
   watch: {

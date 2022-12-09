@@ -9,6 +9,7 @@ const languages = {
         edit: 'Editar',
         delete: 'Eliminar',
         instructions: 'Haz clic en una contraseña',
+        titleEdit: 'Editar contraseña',
     }, 
     EN: {
         passwords: 'Passwords',
@@ -20,6 +21,7 @@ const languages = {
         edit: 'Edit',
         delete: 'Delete',
         instructions: 'Click on a password',
+        titleEdit: 'Edit password',
     },
     FR: {
         passwords: 'Mots de passe',
@@ -31,6 +33,7 @@ const languages = {
         edit: 'Éditer',
         delete: 'Retirer',
         instructions: 'Cliquez sur un mot de passe',
+        titleEdit: 'Éditer mot de passe',
     }
 }
 
