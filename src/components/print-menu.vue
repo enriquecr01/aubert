@@ -41,6 +41,9 @@ export default {
     name: "PrintMenu",
     emits: ["changeLanguage"], // added to avoid Extraneous non-emits event listeners
     mounted() {
+        if (!localStorage.getItem("language")) {
+          localStorage.setItem("language", 'MX');
+        }
         this.selectedLang = localStorage.getItem("language");
         this.setLanguage();
     },
@@ -78,6 +81,7 @@ export default {
       this.setLanguage();
     },
     setLanguage() {
+      console.log(this.selectedLang)
       this.items[0].label = getWord(this.selectedLang, "passwords");
       this.items[1].label = getWord(this.selectedLang, "passwordswifi");
       this.items[2].label = getWord(this.selectedLang, "notes");

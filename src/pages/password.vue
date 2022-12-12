@@ -6,7 +6,7 @@
         <div :class="[Object.keys(selectedPassword).length === 0 ? classInstructions : classSelected]">
             <h3 v-if="Object.keys(selectedPassword).length === 0"> {{ instructions }} </h3>
             <div v-if="Object.keys(selectedPassword).length > 0">
-                <PasswordPanel :language="language" :selectedPassword="selectedPassword" />
+                <PasswordPanel :language="language" :selectedPassword="selectedPassword" @previsualizeColor="updateSelectedPasswordColor" />
             </div>
         </div>
     </div>
@@ -191,13 +191,15 @@ export default {
   },
   methods: {
     putPassword(pass) {
-        console.log(pass)
         this.selectedPassword = pass;
     },
     setLanguage() {
       this.instructions = getWord(this.selectedLang, "instructions");
       this.titleEdit= getWord(this.selectedLang, "titleEdit");
     },
+    updateSelectedPasswordColor(data) {
+        this.selectedPassword.color = data
+    }
   },
   watch: {
     language(newValue) {

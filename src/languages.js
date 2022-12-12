@@ -15,6 +15,9 @@ const languages = {
         usernameLabel: 'Username',
         passwordLabel: 'Contraseña',
         notesLabel: 'Notas',
+        pickColorLabel: 'Color de contraseña',
+        cancelLabel: 'Cancelar',
+        saveLabel: 'Guardar',
     }, 
     EN: {
         passwords: 'Passwords',
@@ -32,6 +35,9 @@ const languages = {
         usernameLabel: 'Username',
         passwordLabel: 'Password',
         notesLabel: 'Notes',
+        pickColorLabel: 'Password color',
+        cancelLabel: 'Cancel',
+        saveLabel: 'Save',
     },
     FR: {
         passwords: 'Mots de passe',
@@ -49,6 +55,9 @@ const languages = {
         usernameLabel: "Nom d'utilisateur",
         passwordLabel: 'Mot de passe',
         notesLabel: 'Notes',
+        pickColorLabel: 'Couleur de mot de passe',
+        cancelLabel: 'Annuler',
+        saveLabel: 'Sauvegarder',
     }
 }
 

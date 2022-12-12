@@ -44,7 +44,6 @@ export default {
       this.deletepass = getWord(this.selectedLang, "delete");
     },
     showPassword() {
-      console.log(this.secret)
       this.$emit('showPassword', { url: this.url, name: this.name, user: this.user, color: this.color, secret: this.secret })
     }
   },
