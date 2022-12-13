@@ -53,14 +53,23 @@
         </div>
 
         <div class="flex justify-end w-full my-4">
-            <button class="bg-red-500 text-gray-50 m-1 px-3 py-2 rounded  p-ripple" v-ripple>{{ cancelLabel }}</button>
-            <button class="bg-blue-500 text-gray-50 m-1 px-3 py-2 rounded  p-ripple" v-ripple>{{ saveLabel }}</button>
-
+            <button class="bg-red-600 text-gray-50 m-1 px-3 py-2 rounded p-ripple" @click="showTemplate($event)" v-ripple>{{ deleteLabel }}</button>
+            <button class="bg-gray-600 text-gray-50 m-1 px-3 py-2 rounded p-ripple" v-ripple v-if="mobile" @click="closeModal">{{ closeLabel }}</button>
+            <button class="bg-blue-600 text-gray-50 m-1 px-3 py-2 rounded p-ripple" v-ripple>{{ saveLabel }}</button>
         </div>
 
-
-
     </div>
+
+        <ConfirmPopup group="demo">
+            <template #message="slotProps">
+                <div class="flex p-4 bg-gray-900 text-gray-50">
+                    <i :class="slotProps.message.icon" style="font-size: 1.5rem"></i>
+                    <p class="pl-2">{{slotProps.message.message}}</p>
+                </div>
+            </template>
+        </ConfirmPopup>
+
+
 </template>
 
 <script>
@@ -71,8 +80,9 @@ export default {
     props: {
         language: String,
         selectedPassword: Object,
+        mobile: Boolean,
     },
-    emits: [ 'previsualizeColor' ],
+    emits: [ 'previsualizeColor', 'closeModal' ],
     mounted() {
         this.selectedLang = localStorage.getItem("language");
         this.setLanguage();
@@ -89,8 +99,12 @@ export default {
             passwordLabel: 'no',
             notesLabel: 'no',
             pickColorLabel: 'no',
-            cancelLabel: 'no',
+            closeLabel: 'no',
             saveLabel: 'no',
+            deleteLabel: 'no',
+            confirmDelete: 'no',
+            yesLabel: 'no',
+            noLabel: 'no',
             visiblePasswordIcon: 'pi-eye',
             typeTextPassword: 'password',
         }
@@ -107,8 +121,12 @@ export default {
       this.passwordLabel = getWord(this.selectedLang, "passwordLabel");
       this.notesLabel = getWord(this.selectedLang, "notesLabel");
       this.pickColorLabel = getWord(this.selectedLang, "pickColorLabel");
-      this.cancelLabel = getWord(this.selectedLang, "cancelLabel");
+      this.closeLabel = getWord(this.selectedLang, "closeLabel");
       this.saveLabel = getWord(this.selectedLang, "saveLabel");
+      this.deleteLabel = getWord(this.selectedLang, "deleteLabel");
+      this.confirmDelete = getWord(this.selectedLang, "confirmDelete");
+      this.yesLabel = getWord(this.selectedLang, "yesLabel");
+      this.noLabel = getWord(this.selectedLang, "noLabel");
     },
     passwordVisible() {
         if (this.visiblePasswordIcon === 'pi-eye') {
@@ -136,7 +154,30 @@ export default {
         this.$refs.notes.focus();
     },
     previsualizeColor(color) {
-        this.$emit('previsualizeColor', color)
+        this.$emit('previsualizeColor', color);
+    },
+    closeModal() {
+        this.$emit('closeModal', true);
+    },
+    showTemplate(event) {
+        this.$confirm.require({
+            target: event.currentTarget,
+            group: 'demo',
+            message: this.confirmDelete,
+            icon: 'pi pi-exclamation-triangle',
+            acceptIcon: 'pi pi-check',
+            rejectIcon: 'pi pi-times',
+            acceptClass: 'p-button-danger',
+            rejectClass: 'p-button-info',
+            acceptLabel: this.yesLabel,
+            rejectLabel: this.noLabel,
+            accept: () => {
+                console.log('ELIMINADO')
+            },
+            reject: () => {
+                console.log('NO ELIMINADO')
+            }
+        });
     }
   },
   watch: {
@@ -153,5 +194,13 @@ export default {
     .custom-error .p-tooltip-text {
         font-size: 0.75rem; /* 12px */
         line-height: 1rem; /* 16px */
+    }
+
+    .p-confirm-popup {
+        background: #000000;
+    }
+
+    .p-confirm-popup-footer {
+        background: rgba(17, 24, 39, 1);
     }
 </style>
