@@ -1,6 +1,11 @@
 <template>
     <div :class="controlColumnsGrid">
         <div class="bg-gray-700 shadow-white h-96vh rounded" style="overflow-y:scroll;">
+            <div class="bg-gray-600 p-4">
+                <input class="w-4/5 bg-gray-700 mr-2 text-gray-50 px-3 py-2 border border-gray-700  border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150" type="text" placeholder="Buscar contraseña" >
+                <button class="w-1/6 bg-blue-700 text-white px-3 py-2 rounded border border-blue-700 p-ripple" v-ripple> <i class=" pi pi-plus p-button-icon"></i> </button>
+            </div>
+
             <Password v-for="(pass, index) in passwords" :key="index" :lang="language" :url="pass.url" :name="pass.name" :user="pass.user" :color="pass.color" :secret="pass.secret" @showPassword="putPassword" />
         </div>
         <div :class="[Object.keys(selectedPassword).length === 0 ? classInstructions : classSelected]">
