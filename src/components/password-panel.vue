@@ -60,14 +60,14 @@
 
     </div>
 
-        <ConfirmPopup group="demo">
-            <template #message="slotProps">
-                <div class="flex p-4 bg-gray-900 text-gray-50">
-                    <i :class="slotProps.message.icon" style="font-size: 1.5rem"></i>
-                    <p class="pl-2">{{slotProps.message.message}}</p>
-                </div>
-            </template>
-        </ConfirmPopup>
+    <ConfirmPopup group="demo">
+        <template #message="slotProps">
+            <div class="flex p-4 bg-gray-900 text-gray-50">
+                <i :class="slotProps.message.icon" style="font-size: 1.5rem"></i>
+                <p class="pl-2">{{slotProps.message.message}}</p>
+            </div>
+        </template>
+    </ConfirmPopup>
 
 
 </template>
@@ -105,6 +105,7 @@ export default {
             confirmDelete: 'no',
             yesLabel: 'no',
             noLabel: 'no',
+            nameLabel: 'no',
             visiblePasswordIcon: 'pi-eye',
             typeTextPassword: 'password',
         }
@@ -127,6 +128,7 @@ export default {
       this.confirmDelete = getWord(this.selectedLang, "confirmDelete");
       this.yesLabel = getWord(this.selectedLang, "yesLabel");
       this.noLabel = getWord(this.selectedLang, "noLabel");
+      this.nameLabel = getWord(this.selectedLang, "nameLabel");
     },
     passwordVisible() {
         if (this.visiblePasswordIcon === 'pi-eye') {

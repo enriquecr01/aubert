@@ -21,6 +21,10 @@ const languages = {
         confirmDelete: '¿Quieres eliminar esta contraseña?',
         yesLabel: 'Si',
         noLabel: 'No',
+        nameLabel: 'Nombre',
+        urlPlaceholder: 'Ejemplo: https://www.google.com',
+        namePlaceholder: 'Nombre de la contraseña',
+        passwordPlaceholder: 'Tu contraseña super secreta ;)',
     }, 
     EN: {
         passwords: 'Passwords',
@@ -44,6 +48,10 @@ const languages = {
         confirmDelete: 'You want to delete this password?',
         yesLabel: 'Yes',
         noLabel: 'No',
+        nameLabel: 'Name',
+        urlPlaceholder: 'Example: https://www.google.com',
+        namePlaceholder: 'Name of the password',
+        passwordPlaceholder: 'Your super secret password ;)',
     },
     FR: {
         passwords: 'Mots de passe',
@@ -67,6 +75,10 @@ const languages = {
         confirmDelete: 'Voulez-vous supprimer ce mot de passe?',
         yesLabel: 'Oui',
         noLabel: 'Non',
+        nameLabel: 'Nom',
+        urlPlaceholder: 'Exemple: https://www.google.com',
+        namePlaceholder: 'Nom du mot de passe',
+        passwordPlaceholder: 'Tu mot de passe super secrète ;)',
     }
 }
 

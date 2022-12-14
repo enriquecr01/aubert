@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { getWord } from "../languages.js";
+import { getWord } from "../../languages.js";
 
 export default {
   name: "PasswordCard",
