@@ -98,7 +98,6 @@ export default {
             username: '',
             name: '',
             url: '',
-            user: '',
             secret: '',
             notes: '',
             visiblePasswordIcon: 'pi-eye',
@@ -118,6 +117,7 @@ export default {
             nameLabel: 'no',
             urlPlaceholder: 'no',
             namePlaceholder: 'no',
+            passwordPlaceholder: 'no',
         }
     },
   methods: {

@@ -11,7 +11,7 @@
         <div :class="[Object.keys(selectedPassword).length === 0 ? classInstructions : classSelected]">
             <h3 v-if="Object.keys(selectedPassword).length === 0"> {{ instructions }} </h3>
             <div v-if="(Object.keys(selectedPassword).length > 0) && !mobile">
-                <PasswordPanel :language="language" :selectedPassword="selectedPassword" @previsualizeColor="updateSelectedPasswordColor" :mobile="mobile" @closeModal="showModal = false" />
+                <PasswordPanel :language="language" :selectedPassword="selectedPassword" :mobile="mobile" @closeModal="showModal = false" />
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
                 <div class="relative bg-gray-700 rounded-lg shadow">
                     <!-- Modal body -->
                     <div class="pb-1 space-y-6" v-if="Object.keys(selectedPassword).length > 0">
-                        <PasswordPanel :language="language" :selectedPassword="selectedPassword" @previsualizeColor="updateSelectedPasswordColor" :mobile="mobile" @closeModal="showModal = false" />
+                        <PasswordPanel :language="language" :selectedPassword="selectedPassword" :mobile="mobile" @closeModal="showModal = false" />
                     </div>
                 </div>
             </div>
@@ -63,7 +63,6 @@ export default {
         this.setLanguage();
         window.addEventListener("resize", this.resizedWindow);
         this.setClassesOnResize(window.innerWidth);
-        console.log('xdd', window.innerWidth)
     },
     unmounted() {
         window.removeEventListener("resize", this.resizedWindow);
@@ -239,9 +238,6 @@ export default {
     setLanguage() {
       this.instructions = getWord(this.selectedLang, "instructions");
       this.titleEdit= getWord(this.selectedLang, "titleEdit");
-    },
-    updateSelectedPasswordColor(data) {
-        this.selectedPassword.color = data
     },
     resizedWindow(e) {
         // This is for make reactive columns

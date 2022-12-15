@@ -1,30 +1,35 @@
 <template>
-    <div :class="`flex items-center gap-4 p-4 rounded ${ selectedPassword.color.replace('500', '800') } text-gray-50`">
-        <img class="rounded-md" :src="`https://logo.clearbit.com/${ selectedPassword.url  }?size=100`">
+    <div :class="`flex items-center gap-4 p-4 rounded ${ color.replace('500', '800') } text-gray-50`">
+        <img class="rounded-md" :src="`https://logo.clearbit.com/${ url  }?size=100`">
         <div class="flex flex-col">
             <strong class="text-3xl font-medium">{{ titleEdit }}</strong>
-            <span class="text-3xl">{{ selectedPassword.name }}</span>
+            <span class="text-3xl">{{ name }}</span>
         </div>
     </div>
     <div class="px-10">
         <div class="w-full my-4">
-            <button :class="`${ selectedPassword.color } text-white mr-3 mb-1 px-3 py-2 rounded-full p-ripple`" v-ripple v-tooltip.top="gosite" @click="goSite"> <i class=" pi pi-external-link p-button-icon"></i> </button>
+            <label class="text-md font-medium text-gray-50"> {{ nameLabel }} </label> 
+            <input :class="`w-full bg-gray-600 text-gray-50 mt-1 px-3 py-2 border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${ color.replace('bg', 'ring')} ease-linear transition-all duration-150`" type="text" :placeholder="namePlaceholder" v-model="name">
+        </div>
+        
+        <div class="w-full my-4">
+            <button :class="`${ color } text-white mr-3 mb-1 px-3 py-2 rounded-full p-ripple`" v-ripple v-tooltip.top="gosite" @click="goSite"> <i class=" pi pi-external-link p-button-icon"></i> </button>
             <label class="text-md font-medium text-gray-50">URL </label> 
-            <input :class="`w-full bg-gray-600 text-gray-50 px-3 py-2 border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${selectedPassword.color.replace('bg', 'ring')} ease-linear transition-all duration-150`" type="text" placeholder="xd.com" :value="selectedPassword.url">
+            <input :class="`w-full bg-gray-600 text-gray-50 px-3 py-2 border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${color.replace('bg', 'ring')} ease-linear transition-all duration-150`" type="text" :placeholder="urlPlaceholder" ref="url" v-on:blur="putValueURL()" :value="url">
         </div>
 
         <div class="w-full my-4">
-            <button :class="`${ selectedPassword.color } text-white mr-3 mb-1 px-3 py-2 rounded-full p-ripple`" @click="focusUsername" v-ripple> <i class=" pi pi-user p-button-icon"></i> </button>
+            <button :class="`${ color } text-white mr-3 mb-1 px-3 py-2 rounded-full p-ripple`" @click="focusUsername" v-ripple> <i class=" pi pi-user p-button-icon"></i> </button>
             <label class="text-md font-medium text-gray-50">{{ usernameLabel }}</label>
-            <input :class="`w-full bg-gray-600 text-gray-50 px-3 py-2 border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${selectedPassword.color.replace('bg', 'ring')} ease-linear transition-all duration-150`" type="text" ref="username" placeholder="example@gmail.com" :value="selectedPassword.user">
+            <input :class="`w-full bg-gray-600 text-gray-50 px-3 py-2 border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${color.replace('bg', 'ring')} ease-linear transition-all duration-150`" type="text" ref="username" placeholder="example@gmail.com" v-model="username">
         </div>
 
         <div class="w-full my-4">
-            <button :class="`${ selectedPassword.color } text-white mr-3 mb-1 px-3 py-2 rounded-full p-ripple`" v-ripple v-tooltip.top="copy" @click="copyClipboard"> <i class=" pi pi-copy p-button-icon"></i> </button>
+            <button :class="`${ color } text-white mr-3 mb-1 px-3 py-2 rounded-full p-ripple`" v-ripple v-tooltip.top="copy" @click="copyClipboard"> <i class=" pi pi-copy p-button-icon"></i> </button>
             <label class="text-md font-medium text-gray-50">{{ passwordLabel }}</label>
 
             <div class="flex justify-end items-center relative">
-                <input :class="`w-full bg-gray-600 text-gray-50 px-3 py-2 pr-14 border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${selectedPassword.color.replace('bg', 'ring')} ease-linear transition-all duration-150`" :type="typeTextPassword" placeholder="password" :value="selectedPassword.secret">
+                <input :class="`w-full bg-gray-600 text-gray-50 px-3 py-2 pr-14 border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${color.replace('bg', 'ring')} ease-linear transition-all duration-150`" :type="typeTextPassword" :placeholder="passwordPlaceholder" v-model="secret">
                 <div class="absolute inset-y-0 right-0 flex items-center pr-9" @click="passwordVisible">
                     <i :class="`pi ${visiblePasswordIcon} p-button-icon absolute text-gray-50`" v-tooltip.top="{ value: visiblePasswordIcon === 'pi-eye' ? showPassword : hidePassword, class: 'custom-error' }"></i>
                 </div>
@@ -33,9 +38,9 @@
         </div>
 
         <div class="w-full my-4">
-            <button :class="`${ selectedPassword.color } text-white mr-3 mb-1 px-3 py-2 rounded-full p-ripple`" @click="focusNotes" v-ripple> <i class=" pi pi-book p-button-icon"></i> </button>
+            <button :class="`${ color } text-white mr-3 mb-1 px-3 py-2 rounded-full p-ripple`" @click="focusNotes" v-ripple> <i class=" pi pi-book p-button-icon"></i> </button>
             <label class="text-md font-medium text-gray-50">{{ notesLabel }}</label>
-            <textarea rows="4" :class="`w-full bg-gray-600 text-gray-50 px-3 py-2 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${selectedPassword.color.replace('bg', 'ring')} ease-linear transition-all duration-150`" :placeholder="notesPlaceholder" ref="notes"></textarea>
+            <textarea rows="4" :class="`w-full bg-gray-600 text-gray-50 px-3 py-2 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${color.replace('bg', 'ring')} ease-linear transition-all duration-150`" :placeholder="notesPlaceholder" ref="notes" v-model="notes"></textarea>
         </div>
 
         <div class="w-full my-4">
@@ -55,7 +60,7 @@
         <div class="flex justify-end w-full my-4">
             <button class="bg-red-600 text-gray-50 m-1 px-3 py-2 rounded p-ripple" @click="showTemplate($event)" v-ripple>{{ deleteLabel }}</button>
             <button class="bg-gray-600 text-gray-50 m-1 px-3 py-2 rounded p-ripple" v-ripple v-if="mobile" @click="closeModal">{{ closeLabel }}</button>
-            <button class="bg-blue-600 text-gray-50 m-1 px-3 py-2 rounded p-ripple" v-ripple>{{ saveLabel }}</button>
+            <button class="bg-blue-600 text-gray-50 m-1 px-3 py-2 rounded p-ripple" v-ripple @click="saveChanges">{{ saveLabel }}</button>
         </div>
 
     </div>
@@ -82,14 +87,21 @@ export default {
         selectedPassword: Object,
         mobile: Boolean,
     },
-    emits: [ 'previsualizeColor', 'closeModal' ],
+    emits: [ 'closeModal' ],
     mounted() {
         this.selectedLang = localStorage.getItem("language");
         this.setLanguage();
+        this.setPropsToData(this.selectedPassword)
     },
     data: function() {
         return {
             titleEdit: '',
+            username: '',
+            name: '',
+            url: '',
+            secret: '',
+            notes: '',
+            color: 'bg-gray-500',
             gosite: 'no',
             copy: 'no',
             showPassword: 'no',
@@ -106,6 +118,9 @@ export default {
             yesLabel: 'no',
             noLabel: 'no',
             nameLabel: 'no',
+            namePlaceholder: 'no',
+            urlPlaceholder: 'no',
+            passwordPlaceholder: 'no',
             visiblePasswordIcon: 'pi-eye',
             typeTextPassword: 'password',
         }
@@ -129,6 +144,9 @@ export default {
       this.yesLabel = getWord(this.selectedLang, "yesLabel");
       this.noLabel = getWord(this.selectedLang, "noLabel");
       this.nameLabel = getWord(this.selectedLang, "nameLabel");
+      this.namePlaceholder = getWord(this.selectedLang, "namePlaceholder");
+      this.passwordPlaceholder = getWord(this.selectedLang, "passwordPlaceholder");
+      this.urlPlaceholder = getWord(this.selectedLang, "urlPlaceholder");      
     },
     passwordVisible() {
         if (this.visiblePasswordIcon === 'pi-eye') {
@@ -156,10 +174,10 @@ export default {
         this.$refs.notes.focus();
     },
     previsualizeColor(color) {
-        this.$emit('previsualizeColor', color);
+        this.color = color;
     },
     closeModal() {
-        this.$emit('closeModal', true);
+        this.$emit('closeModal', false)
     },
     showTemplate(event) {
         this.$confirm.require({
@@ -180,12 +198,29 @@ export default {
                 console.log('NO ELIMINADO')
             }
         });
-    }
+    },
+    setPropsToData(password) {
+        this.username = password.user;
+        this.name = password.name;
+        this.url = password.url;
+        this.secret = password.secret;
+        this.notes = password.notes;
+        this.color = password.color;
+    },
+    putValueURL() {
+        this.url = this.$refs.url.value;
+    },
+    saveChanges() {
+        console.log(this.name, this.url, this.username, this.secret, this.notes, this.color)
+    },
   },
   watch: {
     language(newValue) {
       this.selectedLang = newValue;
       this.setLanguage()
+    },
+    selectedPassword(newValue) {
+        this.setPropsToData(newValue);
     },
   },
 
