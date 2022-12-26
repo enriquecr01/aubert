@@ -8,7 +8,7 @@
 
             <Password v-for="(pass, index) in passwords" :key="index" :lang="language" :url="pass.url" :name="pass.name" :user="pass.user" :color="pass.color" :secret="pass.secret" @showPassword="putPassword" />
         </div>
-        <div :class="[Object.keys(selectedPassword).length === 0 ? classInstructions : classSelected]">
+        <div :class="[Object.keys(selectedPassword).length === 0 ? classInstructions : classSelected]" style="overflow-y:scroll;">
             <h3 v-if="Object.keys(selectedPassword).length === 0"> {{ instructions }} </h3>
             <div v-if="(Object.keys(selectedPassword).length > 0) && !mobile">
                 <PasswordPanel :language="language" :selectedPassword="selectedPassword" :mobile="mobile" @closeModal="showModal = false" />
