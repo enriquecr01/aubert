@@ -44,6 +44,7 @@ import Password from '../components/password/password-card.vue';
 import PasswordPanel from '../components/password-panel.vue';
 import { getWord } from "../languages.js";
 import AddPasswordModal from '../components/password/add-password-modal.vue';
+import { getPasswords } from "../services/passwords-service";
 
 import { VueFinalModal } from 'vue-final-modal'
 
@@ -58,7 +59,9 @@ export default {
         VueFinalModal,
         AddPasswordModal
     },
-    mounted() {
+    async mounted() {
+        let passwordsApi = await getPasswords()
+        this.passwords = passwordsApi
         this.selectedLang = localStorage.getItem("language");
         this.setLanguage();
         window.addEventListener("resize", this.resizedWindow);
