@@ -79,7 +79,7 @@
 
 <script>
 import { getWord } from "../../languages.js";
-
+import { addPassword } from "../../services/passwords-service";
 
 export default {
     name: 'AddPasswordModal',
@@ -150,8 +150,16 @@ export default {
                 this.typeTextPassword = 'password';
             }
         },
-        savePassword() {
-            console.log(this.name, this.url, this.username, this.secret, this.notes, this.color)
+        async savePassword() {
+            await addPassword(this.name, this.url, this.username, this.secret, this.notes, this.color);
+            this.$emit('closeModalAdd', 1);
+            this.name = "";
+            this.url = "";
+            this.username = "";
+            this.secret = "";
+            this.notes = "";
+            this.color = "bg-gray-500";
+            this.$refs.url.value = '';
         },
         putValueURL() {
             this.url = this.$refs.url.value;

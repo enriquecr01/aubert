@@ -6,7 +6,7 @@
                 <button class="w-1/6 bg-blue-700 text-white px-3 py-2 rounded border border-blue-700 p-ripple" v-ripple @click="openModalAdd"> <i class=" pi pi-plus p-button-icon"></i> </button>
             </div>
 
-            <Password v-for="(pass, index) in passwords" :key="index" :lang="language" :url="pass.url" :name="pass.name" :user="pass.user" :color="pass.color" :secret="pass.secret" @showPassword="putPassword" />
+            <Password v-for="(pass, index) in passwords" :key="index" :lang="language" :url="pass.url" :name="pass.name" :user="pass.user" :color="pass.color" :secret="pass.secret" :notes="pass.notes" @showPassword="putPassword" />
         </div>
         <div :class="[Object.keys(selectedPassword).length === 0 ? classInstructions : classSelected]" style="overflow-y:scroll;">
             <h3 v-if="Object.keys(selectedPassword).length === 0"> {{ instructions }} </h3>
@@ -60,8 +60,7 @@ export default {
         AddPasswordModal
     },
     async mounted() {
-        let passwordsApi = await getPasswords()
-        this.passwords = passwordsApi
+        this.passwords = await getPasswords()
         this.selectedLang = localStorage.getItem("language");
         this.setLanguage();
         window.addEventListener("resize", this.resizedWindow);
@@ -262,8 +261,11 @@ export default {
     openModalAdd() {
         this.showModalAdd = true;
     },
-    closeModalAdd() {
+    async closeModalAdd(value) {
         this.showModalAdd = false;
+        if (value === 1) {
+            this.passwords = await getPasswords()
+        }
     }
   },
   watch: {
