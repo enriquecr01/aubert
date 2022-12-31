@@ -4,7 +4,7 @@
     <div :class="controlColumnsGrid">
         <div class="bg-gray-700 shadow-white h-96vh rounded" style="overflow-y:scroll;">
             <div class="bg-gray-600 p-4">
-                <input class="w-4/5 bg-gray-700 mr-2 text-gray-50 px-3 py-2 border border-gray-700  border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150" type="text" placeholder="Buscar contraseña" >
+                <input class="w-4/5 bg-gray-700 mr-2 text-gray-50 px-3 py-2 border border-gray-700  border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150" type="text" placeholder="Buscar contraseña" ref="searchBar" v-on:keyup="searchPasswords" >
                 <button class="w-1/6 bg-blue-700 text-white px-3 py-2 rounded border border-blue-700 p-ripple" v-ripple @click="openModalAdd"> <i class=" pi pi-plus p-button-icon"></i> </button>
             </div>
 
@@ -13,7 +13,7 @@
         <div :class="[Object.keys(selectedPassword).length === 0 ? classInstructions : classSelected]" style="overflow-y:scroll;">
             <h3 v-if="Object.keys(selectedPassword).length === 0"> {{ instructions }} </h3>
             <div v-if="(Object.keys(selectedPassword).length > 0) && !mobile">
-                <PasswordPanel :language="language" :selectedPassword="selectedPassword" :mobile="mobile" @closeModal="showModal = false" />
+                <PasswordPanel :language="language" :selectedPassword="selectedPassword" :mobile="mobile" @closeModal="showModal = false" @passwordUpdated="actionPasswordDone" />
             </div>
         </div>
     </div>
@@ -26,7 +26,7 @@
                 <div class="relative bg-gray-700 rounded-lg shadow">
                     <!-- Modal body -->
                     <div class="pb-1 space-y-6" v-if="Object.keys(selectedPassword).length > 0">
-                        <PasswordPanel :language="language" :selectedPassword="selectedPassword" :mobile="mobile" @closeModal="showModal = false" />
+                        <PasswordPanel :language="language" :selectedPassword="selectedPassword" :mobile="mobile" @closeModal="showModal = false" @passwordUpdated="actionPasswordDone" />
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@ import Password from '../components/password/password-card.vue';
 import PasswordPanel from '../components/password-panel.vue';
 import { getWord } from "../languages.js";
 import AddPasswordModal from '../components/password/add-password-modal.vue';
-import { getPasswords } from "../services/passwords-service";
+import { getPasswords, searchPasswords } from "../services/passwords-service";
 
 import { VueFinalModal } from 'vue-final-modal'
 
@@ -62,7 +62,7 @@ export default {
         AddPasswordModal
     },
     async mounted() {
-        this.passwords = await getPasswords()
+        this.passwords = await getPasswords();
         this.selectedLang = localStorage.getItem("language");
         this.setLanguage();
         window.addEventListener("resize", this.resizedWindow);
@@ -120,7 +120,25 @@ export default {
         if (value === 1) {
             this.passwords = await getPasswords()
         }
-    }
+    },
+    async searchPasswords() {
+        if (this.$refs.searchBar.value === '') {
+            this.passwords = await getPasswords();
+        } else {    
+            this.passwords = await searchPasswords(this.$refs.searchBar.value);
+        }        
+    },
+    async actionPasswordDone(value) {
+        if (this.mobile) {
+            this.showModal = false;
+        } 
+
+        if (value === 'deleted') {
+            this.selectedPassword = {};
+        }
+
+        this.passwords = await getPasswords();
+    },
   },
   watch: {
     language(newValue) {

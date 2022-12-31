@@ -9,6 +9,15 @@ export async function getPasswords() {
       }
 }
 
+export async function searchPasswords(value) {
+  try {
+      const response = await axios.get(`https://aubert-go.onrender.com/password/search/1/${value}`);
+      return response.data.secrets;
+    } catch (error) {
+      console.error(error);
+    }
+}
+
 
 export async function addPassword(name, url, username, secret, notes, color) {
   try {
@@ -50,5 +59,13 @@ export async function updatePassword(id, name, url, username, secret, notes, col
     }
 }
 
+export async function deletePassword(id) {
+  try {
+      const response = await axios.delete(`https://aubert-go.onrender.com/password/delete/${ id }`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+}
 
 

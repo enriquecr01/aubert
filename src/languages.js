@@ -29,6 +29,7 @@ const languages = {
         passwordUpdatedTitle: 'Contraseña modificada',
         passwordFailedTitle: 'Algo fallo :(',
         passwordFailedMessage: 'Durante la transacción algo ocurrió',
+        passwordDeletedTitle: '¡Contraseña eliminada!',
     }, 
     EN: {
         passwords: 'Passwords',
@@ -60,6 +61,7 @@ const languages = {
         passwordUpdatedTitle: 'Password modified',
         passwordFailedTitle: 'Something failed :(',
         passwordFailedMessage: 'During the transaction something happened',
+        passwordDeletedTitle: 'Deleted password!',
     },
     FR: {
         passwords: 'Mots de passe',
@@ -91,6 +93,7 @@ const languages = {
         passwordUpdatedTitle: 'Mot de passe changé',
         passwordFailedTitle: "Quelque chose s'est mal passé :(",
         passwordFailedMessage: "Pendant la transaction, il s'est passé quelque chose",
+        passwordDeletedTitle: 'Mot de passe supprimé!',
     }
 }
 
