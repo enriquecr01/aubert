@@ -79,6 +79,7 @@
 
 <script>
 import { getWord } from "../languages.js";
+import { updatePassword } from "../services/passwords-service";
 
 export default {
     name: 'password-panel',
@@ -95,6 +96,7 @@ export default {
     },
     data: function() {
         return {
+            id: 0,
             titleEdit: '',
             username: '',
             name: '',
@@ -121,6 +123,10 @@ export default {
             namePlaceholder: 'no',
             urlPlaceholder: 'no',
             passwordPlaceholder: 'no',
+            passwordUpdatedTitle: 'no',
+            passwordAddedTitle: 'no',
+            passwordFailedTitle: 'no',
+            passwordFailedMessage: 'no',
             visiblePasswordIcon: 'pi-eye',
             typeTextPassword: 'password',
         }
@@ -147,6 +153,10 @@ export default {
       this.namePlaceholder = getWord(this.selectedLang, "namePlaceholder");
       this.passwordPlaceholder = getWord(this.selectedLang, "passwordPlaceholder");
       this.urlPlaceholder = getWord(this.selectedLang, "urlPlaceholder");      
+      this.passwordUpdatedTitle = getWord(this.selectedLang, "passwordUpdatedTitle");      
+      this.passwordAddedTitle = getWord(this.selectedLang, "passwordAddedTitle");      
+      this.passwordFailedTitle = getWord(this.selectedLang, "passwordFailedTitle");      
+      this.passwordFailedMessage = getWord(this.selectedLang, "passwordFailedMessage");      
     },
     passwordVisible() {
         if (this.visiblePasswordIcon === 'pi-eye') {
@@ -206,12 +216,19 @@ export default {
         this.secret = password.secret;
         this.notes = password.notes;
         this.color = password.color;
+        this.id = password.id;
     },
     putValueURL() {
         this.url = this.$refs.url.value;
     },
-    saveChanges() {
-        console.log(this.name, this.url, this.username, this.secret, this.notes, this.color)
+    async saveChanges() {
+        let response = await updatePassword(this.id, this.name, this.url, this.username, this.secret, this.notes, this.color);
+        if (response.status === 0) {
+            this.$toast.add({severity:'success', summary: this.passwordUpdatedTitle, life: 3000});
+        } else {
+            this.$toast.add({severity:'warn', summary: this.passwordFailedTitle, detail: this.passwordFailedMessage, life: 3000});
+        }
+        console.log(this.id, this.name, this.url, this.username, this.secret, this.notes, this.color)
     },
   },
   watch: {
@@ -240,4 +257,6 @@ export default {
     .p-confirm-popup-footer {
         background: rgba(17, 24, 39, 1);
     }
+
+    
 </style>

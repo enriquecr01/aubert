@@ -25,6 +25,10 @@ const languages = {
         urlPlaceholder: 'Ejemplo: https://www.google.com',
         namePlaceholder: 'Nombre de la contraseña',
         passwordPlaceholder: 'Tu contraseña super secreta ;)',
+        passwordAddedTitle: 'Contraseña agregada',
+        passwordUpdatedTitle: 'Contraseña modificada',
+        passwordFailedTitle: 'Algo fallo :(',
+        passwordFailedMessage: 'Durante la transacción algo ocurrió',
     }, 
     EN: {
         passwords: 'Passwords',
@@ -52,6 +56,10 @@ const languages = {
         urlPlaceholder: 'Example: https://www.google.com',
         namePlaceholder: 'Name of the password',
         passwordPlaceholder: 'Your super secret password ;)',
+        passwordAddedTitle: 'Password added',
+        passwordUpdatedTitle: 'Password modified',
+        passwordFailedTitle: 'Something failed :(',
+        passwordFailedMessage: 'During the transaction something happened',
     },
     FR: {
         passwords: 'Mots de passe',
@@ -79,6 +87,10 @@ const languages = {
         urlPlaceholder: 'Exemple: https://www.google.com',
         namePlaceholder: 'Nom du mot de passe',
         passwordPlaceholder: 'Tu mot de passe super secrète ;)',
+        passwordAddedTitle: 'Mot de passe ajouté',
+        passwordUpdatedTitle: 'Mot de passe changé',
+        passwordFailedTitle: "Quelque chose s'est mal passé :(",
+        passwordFailedMessage: "Pendant la transaction, il s'est passé quelque chose",
     }
 }
 

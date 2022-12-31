@@ -23,7 +23,8 @@ export default {
     user: String,
     color: String,
     secret: String,
-    notes: String
+    notes: String,
+    id: Number
   },
   mounted() {
     this.selectedLang = localStorage.getItem("language");
@@ -45,7 +46,7 @@ export default {
       this.deletepass = getWord(this.selectedLang, "delete");
     },
     showPassword() {
-      this.$emit('showPassword', { url: this.url, name: this.name, user: this.user, color: this.color, secret: this.secret, notes: this.notes })
+      this.$emit('showPassword', { url: this.url, name: this.name, user: this.user, color: this.color, secret: this.secret, notes: this.notes, id: this.id })
     }
   },
   watch: {

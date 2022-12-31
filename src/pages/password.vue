@@ -1,4 +1,6 @@
 <template>
+    <Toast :breakpoints="{'425px': {width: '100%', right: '0', left: '0'}}" />
+
     <div :class="controlColumnsGrid">
         <div class="bg-gray-700 shadow-white h-96vh rounded" style="overflow-y:scroll;">
             <div class="bg-gray-600 p-4">
@@ -6,7 +8,7 @@
                 <button class="w-1/6 bg-blue-700 text-white px-3 py-2 rounded border border-blue-700 p-ripple" v-ripple @click="openModalAdd"> <i class=" pi pi-plus p-button-icon"></i> </button>
             </div>
 
-            <Password v-for="(pass, index) in passwords" :key="index" :lang="language" :url="pass.url" :name="pass.name" :user="pass.user" :color="pass.color" :secret="pass.secret" :notes="pass.notes" @showPassword="putPassword" />
+            <Password v-for="(pass, index) in passwords" :key="index" :lang="language" :url="pass.url" :name="pass.name" :user="pass.user" :color="pass.color" :secret="pass.secret" :notes="pass.notes" :id="pass.ID" @showPassword="putPassword" />
         </div>
         <div :class="[Object.keys(selectedPassword).length === 0 ? classInstructions : classSelected]" style="overflow-y:scroll;">
             <h3 v-if="Object.keys(selectedPassword).length === 0"> {{ instructions }} </h3>
@@ -79,155 +81,7 @@ export default {
             showModal: false,
             mobile: false,
             showModalAdd: false,
-            passwords: [
-                {
-                    url: "spotify.com", 
-                    name: "Spotify",
-                    user: "turchu@live.com",
-                    color: "bg-yellow-500",
-                    secret: "bg-yellow-500",
-                },
-                {
-                    url: "riot-games.com" ,
-                    name: "Riot Games" ,
-                    user: "ejemplo@live.com",
-                    color: "bg-green-500",
-                    secret: "bg-yellow-500",
-                },
-                {
-                    url: "coppel.com",
-                    name: "Coppel",
-                    user: "libni@live.com",
-                    color: "bg-blue-500",
-                    secret: "bg-yellow-500",
-                },
-                {
-                    url: "elrellano.com",
-                    name: "El Rellano",
-                    user: "chistoso@live.com",
-                    color: "bg-purple-500",
-                    secret: "bg-yellow-500",
-                },
-                {
-                    url: "nintendo.com",
-                    name: "Nintentdo",
-                    user: "mario@live.com",
-                    color: "bg-pink-500",
-                    secret: "bg-yellow-500",
-                },
-                {
-                    url: "twitter.com",
-                    name: "Twitter",
-                    user: "@pendejotron1235",
-                    color: "bg-indigo-500",
-                    secret: "bg-yellow-500",
-                },
-                {
-                    url: "instax.com",
-                    name: "Instax",
-                    user: "camaras@live.com",
-                    color: "bg-red-500",
-                    secret: "bg-yellow-500",
-                },
-                {
-                    url: "spotify.com", 
-                    name: "Spotify",
-                    user: "turchu@live.com",
-                    color: "bg-gray-500",
-                    secret: "bg-yellow-500",
-                },
-                {
-                    url: "riot-games.com" ,
-                    name: "Riot Games" ,
-                    user: "ejemplo@live.com",
-                    color: "bg-yellow-500",
-                    secret: "bg-yellow-500",
-                },
-                {
-                    url: "coppel.com",
-                    name: "Coppel",
-                    user: "libni@live.com",
-                    color: "bg-yellow-500",
-                    secret: "bg-yellow-500",
-                },
-                {
-                    url: "elrellano.com",
-                    name: "El Rellano",
-                    user: "chistoso@live.com",
-                    color: "bg-yellow-500",
-                    secret: "bg-yellow-500",
-                },
-                {
-                    url: "nintendo.com",
-                    name: "Nintentdo",
-                    user: "mario@live.com",
-                    color: "bg-yellow-500",
-                    secret: "bg-yellow-500",
-                },
-                {
-                    url: "twitter.com",
-                    name: "Twitter",
-                    user: "@pendejotron1235",
-                    color: "bg-yellow-500",
-                    secret: "bg-yellow-500",
-                },
-                {
-                    url: "instax.com",
-                    name: "Instax",
-                    user: "camaras@live.com",
-                    color: "bg-yellow-500",
-                    secret: "bg-yellow-500",
-                },
-                {
-                    url: "spotify.com", 
-                    name: "Spotify",
-                    user: "turchu@live.com",
-                    color: "bg-yellow-500",
-                    secret: "bg-yellow-500",
-                },
-                {
-                    url: "riot-games.com" ,
-                    name: "Riot Games" ,
-                    user: "ejemplo@live.com",
-                    color: "bg-yellow-500",
-                    secret: "bg-yellow-500",
-                },
-                {
-                    url: "coppel.com",
-                    name: "Coppel",
-                    user: "libni@live.com",
-                    color: "bg-yellow-500",
-                    secret: "bg-yellow-500",
-                },
-                {
-                    url: "elrellano.com",
-                    name: "El Rellano",
-                    user: "chistoso@live.com",
-                    color: "bg-yellow-500",
-                    secret: "bg-yellow-500",
-                },
-                {
-                    url: "nintendo.com",
-                    name: "Nintentdo",
-                    user: "mario@live.com",
-                    color: "bg-yellow-500",
-                    secret: "bg-yellow-500",
-                },
-                {
-                    url: "twitter.com",
-                    name: "Twitter",
-                    user: "@pendejotron1235",
-                    color: "bg-yellow-500",
-                    secret: "bg-yellow-500",
-                },
-                {
-                    url: "instax.com",
-                    name: "Instax",
-                    user: "camaras@live.com",
-                    color: "bg-yellow-500",
-                    secret: "bg-yellow-500",
-                }
-            ]
+            passwords: []
         };
     },
   methods: {
@@ -298,6 +152,5 @@ export default {
     .h-96vh{
         height: 96vh;
     }
-
 
 </style>
