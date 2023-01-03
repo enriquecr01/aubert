@@ -62,9 +62,9 @@ export default {
         AddPasswordModal
     },
     async mounted() {
-        this.passwords = await getPasswords();
         this.selectedLang = localStorage.getItem("language");
         this.setLanguage();
+        this.passwords = await getPasswords();
         window.addEventListener("resize", this.resizedWindow);
         this.setClassesOnResize(window.innerWidth);
     },

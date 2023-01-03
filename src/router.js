@@ -9,11 +9,11 @@ export const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
-            path: "/",
+            path: "/password",
             component: Main,
             children: [
                 {
-                    path: "/",
+                    path: "/password",
                     component: Password
                 },
                 {

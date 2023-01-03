@@ -1,10 +1,11 @@
-
 <template>
-<section class="h-screen">
-  <div class="px-6 h-full text-gray-800">
+<section class="bg-gray-600">
+  <MenuBar />
+  <div class="px-6 text-gray-50 bg-gray-600 h-90vh">
     <div
-      class="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6"
+      class="flex xl:justify-center lg:justify-between justify-center items-center h-90vh flex-wrap g-6"
     >
+
       <div
         class="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0"
       >
@@ -14,62 +15,36 @@
           alt="Sample image"
         />
       </div>
-      <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
+      <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-6">
         <form>
-          <div
-            class="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
-          >
-            <p class="text-center font-semibold mx-4 mb-0">Sing in with your mail and your master key</p>
+          <div class="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
+            <p class="text-center font-semibold mx-4 mb-0">Sign in with your mail and your master key</p>
           </div>
 
           <!-- Email input -->
           <div class="mb-6">
-            <input
-              type="text"
-              class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              id="exampleFormControlInput2"
-              placeholder="Email address"
-            />
+            <input class="`form-control block w-full bg-gray-700 text-gray-50 mt-1 px-3 py-2 border border-gray-900 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150`" type="text" placeholder="Email Address" v-model="name">
           </div>
 
           <!-- Password input -->
           <div class="mb-6">
-            <input
-              type="password"
-              class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              id="exampleFormControlInput2"
-              placeholder="Password"
-            />
+            <input class="`form-control block w-full bg-gray-700 text-gray-50 mt-1 px-3 py-2 border border-gray-900 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150`" type="password" placeholder="Password" v-model="name">
           </div>
 
-          <div class="flex justify-between items-center mb-6">
-            <div class="form-group form-check">
-              <input
-                type="checkbox"
-                class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                id="exampleCheck2"
-              />
-              <label class="form-check-label inline-block text-gray-800" for="exampleCheck2"
-                >Remember me</label
-              >
-            </div>
-            <a href="#!" class="text-gray-800">Forgot password?</a>
-          </div>
+          <!-- <div class="flex justify-between items-center mb-6">
+            <a href="#!" class="text-gray-50">Forgot password?</a>
+          </div> -->
 
           <div class="text-center lg:text-left">
-            <button
-              type="button"
-              class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-            >
-              Login
-            </button>
+
+            <button class="bg-blue-600 text-white font-medium m-1 px-7 py-3 rounded shadow-md  p-ripple" v-ripple>Login</button>
+
             <p class="text-sm font-semibold mt-2 pt-1 mb-0">
               Don't have an account?
               <a
                 href="#!"
-                class="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
-                >Register</a
-              >
+                class="text-yellow-300 hover:text-yellow-500 focus:text-yellow-600 transition duration-200 ease-in-out"
+                >Register</a>
             </p>
           </div>
         </form>
@@ -80,7 +55,19 @@
 </template>
 
 <script>
+import MenuBar from '../components/landing-login/menu-bar.vue';
+
 export default {
+
+  components: {
+    MenuBar
+  }
 
 }
 </script>
+
+<style scoped>
+    .h-90vh{
+        height: 90vh;
+    }
+</style>
