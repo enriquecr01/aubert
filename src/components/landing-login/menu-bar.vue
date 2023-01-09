@@ -9,12 +9,12 @@
       <div class="flex items-center space-x-4">
         <button class="menu-btn">
           <span class="text-gray-200 hover:text-yellow-500 focus:text-yellow-600">
-            Register
+            {{registerLabel}}
           </span>
         </button>
         <button class="menu-btn">
           <span class="text-gray-200 hover:text-yellow-500 focus:text-yellow-600">
-            Login
+            {{loginLabel}}
           </span>
         </button>
       </div>
@@ -23,9 +23,36 @@
 </template>
 
 <script>
-export default {
-    name: 'MenuBar'
+import { getWord } from "../../languages.js";
 
+
+export default {
+  name: 'MenuBar',
+  mounted() {
+    console.log('menubar')
+
+    this.selectedLang = localStorage.getItem("language");
+    this.setLanguage();
+  },
+  data() {
+    return {
+      language: localStorage.getItem("language") ? localStorage.getItem("language") : 'MX',
+      loginLabel: '',
+      registerLabel: '',
+    }
+  },
+  methods: {
+    setLanguage() {
+      this.loginLabel = getWord(this.selectedLang, "loginLabel");
+      this.registerLabel = getWord(this.selectedLang, "registerLabel");
+    },
+  },
+  watch: {
+    language(newValue) {
+      this.selectedLang = newValue;
+      this.setLanguage()
+    },
+  }
 }
 </script>
 

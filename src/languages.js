@@ -30,6 +30,11 @@ const languages = {
         passwordFailedTitle: 'Algo fallo :(',
         passwordFailedMessage: 'Durante la transacción algo ocurrió',
         passwordDeletedTitle: '¡Contraseña eliminada!',
+        signInLabel: 'Inicia sesión con tu correo y tu clave maestra',
+        emailAddressLabel: 'Correo electronico',
+        loginLabel: 'Iniciar Sesion',
+        noAccountLabel: '¿No tienes cuenta?',
+        registerLabel: 'Registrar',
     }, 
     EN: {
         passwords: 'Passwords',
@@ -62,6 +67,11 @@ const languages = {
         passwordFailedTitle: 'Something failed :(',
         passwordFailedMessage: 'During the transaction something happened',
         passwordDeletedTitle: 'Deleted password!',
+        signInLabel: 'Sign in with your mail and your master key',
+        emailAddressLabel: 'Email Address',
+        loginLabel: 'Login',
+        noAccountLabel: "Don't have an account?",
+        registerLabel: 'Register',
     },
     FR: {
         passwords: 'Mots de passe',
@@ -94,6 +104,11 @@ const languages = {
         passwordFailedTitle: "Quelque chose s'est mal passé :(",
         passwordFailedMessage: "Pendant la transaction, il s'est passé quelque chose",
         passwordDeletedTitle: 'Mot de passe supprimé!',
+        signInLabel: 'Connectez-vous avec votre mail et votre clé principale',
+        emailAddressLabel: 'Eddresse E-mail',
+        loginLabel: 'Connexion',
+        noAccountLabel: "Vous n'avez pas de compte?",
+        registerLabel: "S'inscrire",
     }
 }
 

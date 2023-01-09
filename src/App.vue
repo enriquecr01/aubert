@@ -1,5 +1,5 @@
 <template>
-  <router-view></router-view>
+  <router-view :language="language"></router-view>
 </template>
 
 <script>
@@ -11,10 +11,13 @@ export default {
   },
   data() {
     return {
+      language: localStorage.getItem("language"),
     }
   },
   methods: {
-
+    selectedLang(lang) {
+      this.language = lang;
+    },
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
 <section class="bg-gray-600">
-  <MenuBar />
+  <MenuBar :language="language" />
   <div class="px-6 text-gray-50 bg-gray-600 h-90vh">
     <div
       class="flex xl:justify-center lg:justify-between justify-center items-center h-90vh flex-wrap g-6"
@@ -17,17 +17,17 @@
       </div>
       <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-6">
           <div class="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
-            <p class="text-center font-semibold mx-4 mb-0">Sign in with your mail and your master key</p>
+            <p class="text-center font-semibold mx-4 mb-0">{{ signInLabel }}</p>
           </div>
 
           <Message severity="error" v-if="errorLogin" :closable="false" :life="3000">Bad credentials. Try again please.</Message>
 
           <div class="mb-6">
-            <input class="`form-control block w-full bg-gray-700 text-gray-50 mt-1 px-3 py-2 border border-gray-900 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150`" type="text" placeholder="Email Address" v-model="email">
+            <input class="`form-control block w-full bg-gray-700 text-gray-50 mt-1 px-3 py-2 border border-gray-900 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150`" type="text" :placeholder="emailAddressLabel" v-model="email">
           </div>
 
           <div class="mb-6">
-            <input class="`form-control block w-full bg-gray-700 text-gray-50 mt-1 px-3 py-2 border border-gray-900 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150`" type="password" placeholder="Password" v-model="password">
+            <input class="`form-control block w-full bg-gray-700 text-gray-50 mt-1 px-3 py-2 border border-gray-900 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150`" type="password" :placeholder="passwordLabel" v-model="password">
           </div>
 
           <!-- <div class="flex justify-between items-center mb-6">
@@ -36,14 +36,14 @@
 
           <div class="text-center lg:text-left">
 
-            <button class="bg-blue-600 text-white font-medium m-1 px-7 py-3 rounded shadow-md p-ripple" v-ripple @click="attemptLogin">Login</button>
+            <button class="bg-blue-600 text-white font-medium m-1 px-7 py-3 rounded shadow-md p-ripple" v-ripple @click="attemptLogin">{{loginLabel}}</button>
 
             <p class="text-sm font-semibold mt-2 pt-1 mb-0">
-              Don't have an account?
+              {{noAccountLabel}}
               <a
                 href="#!"
                 class="text-yellow-300 hover:text-yellow-500 focus:text-yellow-600 transition duration-200 ease-in-out"
-                >Register</a>
+                >{{registerLabel}}</a>
             </p>
           </div>
       </div>
@@ -55,20 +55,42 @@
 <script>
 import MenuBar from '../components/landing-login/menu-bar.vue';
 import { login } from '../services/user-service';
+import { getWord } from "../languages.js";
+
 
 export default {
 
   components: {
     MenuBar
   },
+  mounted() {
+    console.log('xdddd')
+    this.selectedLang = localStorage.getItem("language");
+    this.setLanguage();
+  },
   data() {
     return {
       email: '',
       password: '',
-      errorLogin: false
+      errorLogin: false,
+      language: localStorage.getItem("language") ? localStorage.getItem("language") : 'MX',
+      signInLabel: 'no',
+      passwordLabel: 'no',
+      emailAddressLabel: '',
+      loginLabel: '',
+      noAccountLabel: '',
+      registerLabel: '',
     }
   },
   methods: {
+    setLanguage() {
+      this.signInLabel = getWord(this.selectedLang, "signInLabel");
+      this.passwordLabel = getWord(this.selectedLang, "passwordLabel");
+      this.emailAddressLabel = getWord(this.selectedLang, "emailAddressLabel");
+      this.loginLabel = getWord(this.selectedLang, "loginLabel");
+      this.noAccountLabel = getWord(this.selectedLang, "noAccountLabel");
+      this.registerLabel = getWord(this.selectedLang, "registerLabel");
+    },
     async attemptLogin() {
       let response = {};
       response = await login(this.email, this.password);
@@ -82,7 +104,13 @@ export default {
         this.$router.push('/password');
       }
 
-    }
+    },
+  },
+  watch: {
+    language(newValue) {
+      this.selectedLang = newValue;
+      this.setLanguage()
+    },
   }
 
 }
