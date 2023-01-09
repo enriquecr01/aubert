@@ -3,7 +3,7 @@
       <img class="h-12 rounded-full" src="http://www.gravatar.com/avatar/2acfb745ecf9d4dccb3364752d17f65f?s=260&d=mp" alt="James Bhatta" />
       <div>
         <h4 class="font-semibold text-lg text-gray-300 capitalize font-poppins tracking-wide">
-          James Bhatta
+          {{ nameUser }}
         </h4>
       </div>
     </div>
@@ -21,7 +21,7 @@
     </div>
 
     <ul class="space-y-2 text-sm">
-      <li v-for="(item, index) in items" :key="index">
+      <li v-for="(item, index) in items" :key="index" @click="item.method">
         <router-link :to="item.to">
           <a class="flex items-center space-x-3 text-gray-300 p-2 rounded-md font-medium hover:bg-gray-700 focus:shadow-outline" >
             <span class="text-gray-200">
@@ -44,32 +44,38 @@ export default {
         if (!localStorage.getItem("language")) {
           localStorage.setItem("language", 'MX');
         }
+        this.nameUser = localStorage.getItem("name");
         this.selectedLang = localStorage.getItem("language");
         this.setLanguage();
     },
     data() {
     return {
       selectedLang: "MX",
+      nameUser: '',
       items: [
         {
           label: "XD",
           icon: "pi pi-fw pi-key",
-          to: "/",
+          to: "/password",
+          method: this.noFunction
         },
         {
           label: "Contraseñas de Wi-Fi",
           icon: "pi pi-fw pi-wifi",
           to: "/wifipassword",
+          method: this.noFunction
         },
         {
           label: "Notas",
           icon: "pi pi-fw pi-file",
           to: "/notes",
+          method: this.noFunction
         },
         {
           label: "Cerrar Sesion",
           icon: "pi pi-fw pi-power-off",
           to: "/login",
+          method: this.removeDataSession
         },
       ],
     };
@@ -89,6 +95,14 @@ export default {
 
       this.$emit("changeLanguage", this.selectedLang);
     },
+    noFunction() {
+    },
+    removeDataSession() {
+      localStorage.removeItem('id');
+      localStorage.removeItem('email');
+      localStorage.removeItem('name');
+      this.$router.push('/login')
+    }
   },
 }
 </script>

@@ -14,17 +14,21 @@ export const router = createRouter({
             children: [
                 {
                     path: "/password",
-                    component: Password
+                    component: Password,
+                    meta: { requiresAuth: true }
                 },
                 {
                     path: "/wifipassword",
-                    component: WiFiPassword
+                    component: WiFiPassword,
+                    meta: { requiresAuth: true }
                 },
                 {
                     path: "/notes",
-                    component: Notes
+                    component: Notes,
+                    meta: { requiresAuth: true }
                 },
-            ]
+            ],
+
         },
         {
             path: "/login",
@@ -32,3 +36,19 @@ export const router = createRouter({
         }
     ]
 });
+
+router.beforeEach((to) => {
+    let id = localStorage.getItem('id');
+
+    if (to.fullPath === '/login') {
+        if (id !== null) {
+            router.push('/password')
+        }
+    }
+
+    if (to.meta.requiresAuth) {
+        if (id === null) {
+            router.push('/login')
+        }
+    }
+}) 

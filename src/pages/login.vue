@@ -20,12 +20,12 @@
             <p class="text-center font-semibold mx-4 mb-0">Sign in with your mail and your master key</p>
           </div>
 
-          <!-- Email input -->
+          <Message severity="error" v-if="errorLogin" :closable="false" :life="3000">Bad credentials. Try again please.</Message>
+
           <div class="mb-6">
             <input class="`form-control block w-full bg-gray-700 text-gray-50 mt-1 px-3 py-2 border border-gray-900 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150`" type="text" placeholder="Email Address" v-model="email">
           </div>
 
-          <!-- Password input -->
           <div class="mb-6">
             <input class="`form-control block w-full bg-gray-700 text-gray-50 mt-1 px-3 py-2 border border-gray-900 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150`" type="password" placeholder="Password" v-model="password">
           </div>
@@ -64,17 +64,24 @@ export default {
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      errorLogin: false
     }
   },
   methods: {
     async attemptLogin() {
-      console.log(this.email, this.password)
-      let response = await login(this.email, this.password)
-      console.log(response)
-      localStorage.setItem('email', response.email)
-      localStorage.setItem('id', response.ID)
-      localStorage.setItem('name', response.name)
+      let response = {};
+      response = await login(this.email, this.password);
+
+      if (response.errorStatus) {
+        this.errorLogin = true;
+      } else {
+        localStorage.setItem('id', response.user.ID);
+        localStorage.setItem('email', response.user.email);
+        localStorage.setItem('name', response.user.name);
+        this.$router.push('/password');
+      }
+
     }
   }
 

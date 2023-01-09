@@ -9,13 +9,11 @@ export async function login(email, password) {
       const response = await axios.post('https://aubert-go.onrender.com/login', loginForm, {
         "Content-Type": "multipart/form-data",
       });
-
-      if (response.request.status === 401) {
-          console.log('KAKAKAKAKAKKA', response.request.status)
-      }
       
       return response.data;
     } catch (error) {
       console.error(error);
+      return { errorStatus: error.response.status }
+
     }
 }

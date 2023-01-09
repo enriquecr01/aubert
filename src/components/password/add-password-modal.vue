@@ -60,6 +60,7 @@
                                 <button class="bg-pink-500 m-1 px-5 py-5 rounded-full p-ripple" v-ripple @click="previsualizeColor('bg-pink-500')"></button>
                                 <button class="bg-indigo-500 m-1 px-5 py-5 rounded-full p-ripple" v-ripple @click="previsualizeColor('bg-indigo-500')"></button>
                                 <button class="bg-red-500 m-1 px-5 py-5 rounded-full p-ripple" v-ripple @click="previsualizeColor('bg-red-500')"></button>
+                                <button class="bg-orange-500 m-1 px-5 py-5 rounded-full p-ripple" v-ripple @click="previsualizeColor('bg-orange-500')"></button>
                             </div>
                         </div>
 
