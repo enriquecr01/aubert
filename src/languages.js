@@ -35,6 +35,12 @@ const languages = {
         loginLabel: 'Iniciar Sesion',
         noAccountLabel: '¿No tienes cuenta?',
         registerLabel: 'Registrar',
+        titleLandingHeader: "Aubert, tu memorizador de contraseñas",
+        descriptionLandingLabel: "Aubert te ayuda a guardar tus contraseñas para iniciar sesion. Si viajas mucho y/o cambias de telefono, tambien puedes agregar contraseñas de WiFi. O si quieres apuntar algo para verlo despues, puedes hacer notas.",
+        registerTitleLabel: "¡Registrate en Aubert!",
+        registerInstructionsLabel: "Escribe estos datos para registrarte.",
+        fullNameRegisterLabel: "Nombre completo",
+        loginFromRegisterLabel: "¿Ya tienes una cuenta?",
     }, 
     EN: {
         passwords: 'Passwords',
@@ -72,6 +78,12 @@ const languages = {
         loginLabel: 'Login',
         noAccountLabel: "Don't have an account?",
         registerLabel: 'Register',
+        titleLandingHeader: "Aubert, your password memorizer",
+        descriptionLandingLabel: "Aubert helps you save your passwords to log in. If you travel a lot and/or change phones, you can also add WiFi passwords. Or if you want to write something down to see it later, you can make notes.",
+        registerTitleLabel: "Register in Aubert!",
+        registerInstructionsLabel: "Enter these details to register.",
+        fullNameRegisterLabel: "Full Name",
+        loginFromRegisterLabel: "Do you have an account?",
     },
     FR: {
         passwords: 'Mots de passe',
@@ -109,6 +121,12 @@ const languages = {
         loginLabel: 'Connexion',
         noAccountLabel: "Vous n'avez pas de compte?",
         registerLabel: "S'inscrire",
+        titleLandingHeader: "Aubert, votre mémoriseur de mots de passe",
+        descriptionLandingLabel: "Aubert vous aide à enregistrer vos mots de passe pour vous connecter. Si vous voyagez beaucoup et/ou changez de téléphone, vous pouvez également ajouter des mots de passe WiFi. Ou si vous voulez écrire quelque chose pour le voir plus tard, vous pouvez prendre des notes.",
+        registerTitleLabel: "Inscrivez-vous à Aubert!",
+        registerInstructionsLabel: "Entrez ces détails pour vous inscrire.",
+        fullNameRegisterLabel: "Nom et prénom",
+        loginFromRegisterLabel: "Avez-vous un compte?",
     }
 }
 

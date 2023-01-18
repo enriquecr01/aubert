@@ -1,7 +1,7 @@
 <template>
 <section class="bg-gray-600">
   <MenuBar :language="language" />
-  <div class="px-6 text-gray-50 bg-gray-600 h-90vh">
+  <div class="px-6 text-gray-50 bg-gray-700 h-90vh">
     <div
       class="flex xl:justify-center lg:justify-between justify-center items-center h-90vh flex-wrap g-6"
     >
@@ -23,11 +23,11 @@
           <Message severity="error" v-if="errorLogin" :closable="false" :life="3000">Bad credentials. Try again please.</Message>
 
           <div class="mb-6">
-            <input class="`form-control block w-full bg-gray-700 text-gray-50 mt-1 px-3 py-2 border border-gray-900 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150`" type="text" :placeholder="emailAddressLabel" v-model="email">
+            <input class="`form-control block w-full bg-gray-800 text-gray-50 mt-1 px-3 py-2 border border-gray-900 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150`" type="text" :placeholder="emailAddressLabel" v-model="email">
           </div>
 
           <div class="mb-6">
-            <input class="`form-control block w-full bg-gray-700 text-gray-50 mt-1 px-3 py-2 border border-gray-900 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150`" type="password" :placeholder="passwordLabel" v-model="password">
+            <input class="`form-control block w-full bg-gray-800 text-gray-50 mt-1 px-3 py-2 border border-gray-900 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150`" type="password" :placeholder="passwordLabel" v-model="password">
           </div>
 
           <!-- <div class="flex justify-between items-center mb-6">
@@ -36,14 +36,15 @@
 
           <div class="text-center lg:text-left">
 
-            <button class="bg-blue-600 text-white font-medium m-1 px-7 py-3 rounded shadow-md p-ripple" v-ripple @click="attemptLogin">{{loginLabel}}</button>
+            <button class="bg-blue-600 text-white font-medium m-1 px-7 py-3 rounded shadow-md p-ripple hover:bg-blue-800 transition duration-200 ease-in-out" v-ripple @click="attemptLogin">{{loginLabel}}</button>
 
             <p class="text-sm font-semibold mt-2 pt-1 mb-0">
               {{noAccountLabel}}
-              <a
-                href="#!"
-                class="text-yellow-300 hover:text-yellow-500 focus:text-yellow-600 transition duration-200 ease-in-out"
-                >{{registerLabel}}</a>
+              <router-link to="/register">
+                <a class="text-yellow-300 hover:text-yellow-500 focus:text-yellow-600 transition duration-200 ease-in-out">
+                  {{registerLabel}}
+                </a>
+              </router-link>
             </p>
           </div>
       </div>
