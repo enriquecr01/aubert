@@ -101,6 +101,7 @@ export default {
       localStorage.removeItem('id');
       localStorage.removeItem('email');
       localStorage.removeItem('name');
+      localStorage.removeItem('token');
       this.$router.push('/login')
     }
   },

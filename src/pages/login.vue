@@ -64,7 +64,6 @@ export default {
     MenuBar
   },
   mounted() {
-    console.log('xdddd')
     this.selectedLang = localStorage.getItem("language");
     this.setLanguage();
   },
@@ -101,6 +100,7 @@ export default {
         localStorage.setItem('id', response.user.ID);
         localStorage.setItem('email', response.user.email);
         localStorage.setItem('name', response.user.name);
+        localStorage.setItem('token', response.token);
         this.$router.push('/password');
       }
 

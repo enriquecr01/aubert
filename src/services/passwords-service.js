@@ -1,4 +1,4 @@
-const axios = require("axios").default;
+import axios from './custom-axios';
 
 export async function getPasswords() {
   try {
