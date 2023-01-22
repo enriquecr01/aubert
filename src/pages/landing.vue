@@ -18,9 +18,11 @@
                   {{ loginLabel }}
                 </button>
             </router-link>
-            <button class="ml-4 inline-flex text-gray-50 bg-gray-700 border-0 py-2 px-6 focus:outline-none hover:bg-gray-800 hover:text-white rounded text-lg hover:shadow-2xl transition duration-200 ease-in-out">
-              {{ registerLabel }}
-            </button>
+            <router-link to="/login">
+              <button class="ml-4 inline-flex text-gray-50 bg-gray-700 border-0 py-2 px-6 focus:outline-none hover:bg-gray-800 hover:text-white rounded text-lg hover:shadow-2xl transition duration-200 ease-in-out">
+                {{ registerLabel }}
+              </button>
+            </router-link>
           </div>
         </div>
       </div>

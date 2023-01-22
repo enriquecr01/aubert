@@ -41,6 +41,8 @@ const languages = {
         registerInstructionsLabel: "Escribe estos datos para registrarte.",
         fullNameRegisterLabel: "Nombre completo",
         loginFromRegisterLabel: "¿Ya tienes una cuenta?",
+        sessionFoundTitleLabel: "Tienes una sesion iniciada en este dispositivo. ¿Quieres invalidar la otra sesion y volver a iniciar sesion?",
+        sessionFoundTitleNoButtonLabel: "Por favor cierra esta ventana y ve a la que esta abierta la aplicacion.",
     }, 
     EN: {
         passwords: 'Passwords',
@@ -84,6 +86,9 @@ const languages = {
         registerInstructionsLabel: "Enter these details to register.",
         fullNameRegisterLabel: "Full Name",
         loginFromRegisterLabel: "Do you have an account?",
+        sessionFoundTitleLabel: "You are logged in on this device. Do you want to invalidate the other session and start the session again?",
+        sessionFoundTitleNoButtonLabel: "Please close this window and go to the one where the application is open.",
+
     },
     FR: {
         passwords: 'Mots de passe',
@@ -127,6 +132,9 @@ const languages = {
         registerInstructionsLabel: "Entrez ces détails pour vous inscrire.",
         fullNameRegisterLabel: "Nom et prénom",
         loginFromRegisterLabel: "Avez-vous un compte?",
+        sessionFoundTitleLabel: "Vous êtes connecté sur cet appareil. Voulez-vous valider l'autre session et recommencer la session?",
+        sessionFoundTitleNoButtonLabel: "Veuillez fermer cette fenêtre et vous rendre dans celle où l'application est ouverte.",
+
     }
 }
 

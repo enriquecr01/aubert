@@ -5,6 +5,7 @@ import WiFiPassword from './pages/wifi-password.vue';
 import Login from './pages/login.vue';
 import Landing from './pages/landing.vue';
 import Register from './pages/register.vue';
+import SessionFound from './pages/session-found.vue';
 import Main from './main.vue';
 
 export const router = createRouter({
@@ -44,15 +45,21 @@ export const router = createRouter({
             path: "/register",
             component: Register
         },
+        {
+            path: "/session-found",
+            component: SessionFound
+        },
     ]
 });
 
-router.beforeEach((to) => {
+router.beforeEach((to, from) => {
     let id = localStorage.getItem('id');
+
+    console.log("XDDDD", from)
 
     if (to.fullPath === '/login' || to.fullPath === '/') {
         if (id !== null) {
-            router.push('/password')
+            router.push('/session-found')
         }
     }
 
@@ -61,4 +68,14 @@ router.beforeEach((to) => {
             router.push('/login')
         }
     }
+
+    if (from.fullPath === "/") {
+        if (to.meta.requiresAuth) {
+            if (id !== null) {
+                router.push('/session-found')
+            }
+        }
+    }
+
+
 }) 

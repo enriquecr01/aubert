@@ -99,6 +99,8 @@ import TreeTable from 'primevue/treetable';
 import TriStateCheckbox from 'primevue/tristatecheckbox';
 import VirtualScroller from 'primevue/virtualscroller';
 
+import Vidle from 'v-idle-3'
+
 import 'primevue/resources/themes/saga-blue/theme.css'; //theme
 import 'primevue/resources/primevue.min.css'; //core css
 import 'primeicons/primeicons.css'; //icons
@@ -110,6 +112,7 @@ app.use(ConfirmationService);
 app.use(ToastService);
 app.use(DialogService);
 app.use(router);
+app.use(Vidle);
 
 app.directive('tooltip', Tooltip);
 app.directive('badge', BadgeDirective);
