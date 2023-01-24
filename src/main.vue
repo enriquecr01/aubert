@@ -32,11 +32,11 @@ export default {
     MenuBar,
   },
   mounted() {
-    window.addEventListener('beforeunload', (event) => {
-        event.preventDefault();
-        this.eliminateSession();
-        event.returnValue = '';
-    });
+    // window.addEventListener('beforeunload', (event) => {
+    //     event.preventDefault();
+    //     this.eliminateSession();
+    //     event.returnValue = '';
+    // });
     
     this.intervalSession = setInterval(this.evaluateSession, 1000);
   },
