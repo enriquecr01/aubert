@@ -99,7 +99,11 @@ import TreeTable from 'primevue/treetable';
 import TriStateCheckbox from 'primevue/tristatecheckbox';
 import VirtualScroller from 'primevue/virtualscroller';
 
-import Vidle from 'v-idle-3'
+import Vidle from 'v-idle-3';
+
+import { QuillEditor } from '@vueup/vue-quill'
+
+import '@vueup/vue-quill/dist/vue-quill.bubble.css';
 
 import 'primevue/resources/themes/saga-blue/theme.css'; //theme
 import 'primevue/resources/primevue.min.css'; //core css
@@ -113,6 +117,9 @@ app.use(ToastService);
 app.use(DialogService);
 app.use(router);
 app.use(Vidle);
+
+app.component('QuillEditor', QuillEditor)
+
 
 app.directive('tooltip', Tooltip);
 app.directive('badge', BadgeDirective);
@@ -207,6 +214,5 @@ app.component('TreeSelect', TreeSelect);
 app.component('TreeTable', TreeTable);
 app.component('TriStateCheckbox', TriStateCheckbox);
 app.component('VirtualScroller', VirtualScroller);
-
 
 app.mount('#app')

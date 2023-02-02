@@ -166,7 +166,7 @@ export default {
             this.url = this.$refs.url.value;
         },
         closeModal() {
-            this.$emit('closeModalAdd', false)
+            this.$emit('closeModalAdd', false);
         }
   },
     watch: {
