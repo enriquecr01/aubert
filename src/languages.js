@@ -88,7 +88,6 @@ const languages = {
         loginFromRegisterLabel: "Do you have an account?",
         sessionFoundTitleLabel: "You are logged in on this device. Do you want to invalidate the other session and start the session again?",
         sessionFoundTitleNoButtonLabel: "Please close this window and go to the one where the application is open.",
-
     },
     FR: {
         passwords: 'Mots de passe',

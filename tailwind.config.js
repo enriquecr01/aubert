@@ -9,6 +9,9 @@ module.exports = {
       // 'smm': '600px',
     },
     extend: {
+      lineClamp: {
+        7: '7',
+      },
       colors: {
         orange: {
           50: '#fff7ed',
@@ -37,5 +40,7 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+  ],
 }
