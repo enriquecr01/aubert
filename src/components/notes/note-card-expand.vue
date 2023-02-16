@@ -1,9 +1,9 @@
 <template>
   <v-idle @idle="saveNote" :duration="5" />
 
-        <div :class="`flex flex-col w-full ${color.replace('bg', 'border')} h-screen md:h-screen lg:max-h-96 rounded-lg shadow-lg ${color} hover:${color.replace('800','700')} ease-linear transition-all duration-150`">
-          <div class="py-6 px-6">
-            <h5 class="font-medium text-gray-50">{{ title }}</h5>
+        <div :class="`flex flex-col w-full ${colorNote.replace('bg', 'border')} h-screen md:h-screen lg:max-h-96 rounded-lg shadow-lg ${colorNote} hover:${colorNote.replace('800','700')} ease-linear transition-all duration-150`">
+          <div class="py-3 px-3">
+            <input :class="`w-full bg-transparent font-medium text-gray-50 px-3 py-2 pr-14 border border-transparent rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${colorNote.replace('bg', 'ring')} ease-linear transition-all duration-150`" v-model="titleNote">
           </div>
           <main class="p-3 mb-auto text-gray-200">
             <QuillEditor theme="bubble" :content="content" contentType="html" placeholder="..." @update:content="onWrite" />
@@ -59,9 +59,11 @@ import { getWord } from '../../languages';
     data() {
         return {
           content: "",
+          titleNote: "",
+          colorNote: "",
           selectedLang: "MX",
           closeLabel: "",
-          classDivColors: ""
+          classDivColors: "",
         }
     },
     methods: {
@@ -69,41 +71,47 @@ import { getWord } from '../../languages';
         this.content = event;
       },
       saveNote() {
-        console.log("voy a guardar esta madre", this.content)
+        console.log("voy a guardar esta madre", this.content);
       },
       closeNote() {
         this.$emit("closeNote", true);
       },
       setLanguage() {
-        this.closeLabel = getWord(this.selectedLang, "closeLabel")
+        this.closeLabel = getWord(this.selectedLang, "closeLabel");
       },
       appearDivColors() {
-        if (this.classDivColors === `${this.color.replace('800', '900')} hidden rounded`) {
-          this.classDivColors = `${this.color.replace('800', '900')} flex overflow-x-auto rounded `;
+        if (this.classDivColors === `${this.colorNote.replace('800', '900')} hidden rounded`) {
+          this.classDivColors = `${this.colorNote.replace('800', '900')} flex overflow-x-auto rounded`;
         } else {
-          this.classDivColors = `${this.color.replace('800', '900')} hidden rounded`;
-
+          this.classDivColors = `${this.colorNote.replace('800', '900')} hidden rounded`;
         }
       },
       colorsDivDefault() {
-        this.classDivColors = `${this.color.replace('800', '900')} hidden rounded`;
-        console.log("COLORES JAJAJA")
+        this.classDivColors = `${this.colorNote.replace('800', '900')} hidden rounded`;        
+      },
+      previsualizeColor(color) {
+        this.colorNote = color;
+        this.classDivColors = `${this.colorNote.replace('800', '900')} flex overflow-x-auto rounded`;
       }
     },
     watch: {
-      ID(newValue) {
-        console.log("ID", newValue)
-        this.colorsDivDefault()
+      ID() {
+        this.colorsDivDefault();
       },
-        note(newValue) {
-        console.log("NUEVA NOTA")
-            this.content = newValue;
-
-        },
-        language(newValue) {
-          this.selectedLang = newValue;
-          this.setLanguage()
-        },
+      note(newValue) {
+        this.content = newValue;
+      },
+      title(newValue) {
+        this.titleNote = newValue;
+      },
+      color(newValue) {
+        this.colorNote = newValue;
+        this.classDivColors = `${this.colorNote.replace('800', '900')} hidden rounded`;        
+      },
+      language(newValue) {
+        this.selectedLang = newValue;
+        this.setLanguage();
+      },
     },
   };
 </script>
