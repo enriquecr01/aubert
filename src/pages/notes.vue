@@ -1,21 +1,21 @@
 
 <template>
-    <div class="grid grid-cols-auto h-96vh">
-
-        <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 p-3 bg-gray-700 rounded auto-rows-min" style="overflow-y:scroll;" >
-            <NoteCard v-for="(note, index) in notes" :key="index" :ID="note.ID" :title="note.title" :note="note.note" :color="note.color" @expandNote="expandNote" />
-                
+    <div class=" h-96vh">
+        <div class="bg-gray-700 shadow-white">
+            <div class="bg-gray-600 p-4">
+                <input class="w-4/5 bg-gray-700 mr-2 text-gray-50 px-3 py-2 border border-gray-700  border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150" type="text" placeholder="Buscar Nota" ref="searchBar" v-on:keyup="searchNotes" >
+                <button class="w-1/6 bg-blue-700 text-white px-3 py-2 rounded border border-blue-700 p-ripple" v-ripple @click="addNote"> <i class=" pi pi-plus p-button-icon"></i> </button>
+            </div>
         </div>
+
+        <div class="grid h-88vh lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 p-3 bg-gray-700 rounded auto-rows-min" style="overflow-y:scroll;" >
+            <NoteCard v-for="(note, index) in notes" :key="index" :ID="note.ID" :title="note.title" :note="note.note" :color="note.color" @expandNote="expandNote" />
+        </div>
+
     </div> 
 
     <vue-final-modal v-model="showModal" :esc-to-close="true" class="overflow-y-auto" classes="flex items-center" content-class="mx-auto lg:w-8/12 md:w-full w-full h-screen md:h-screen lg:max-h-80" >
-        
-        <!-- <div class="flex items-center justify-center h-screen"> -->
-
-            <NoteExpandedCard :language="language" :ID="selectedNote.ID" :title="selectedNote.title" :note="selectedNote.note" :color="selectedNote.color" @closeNote="showModal=false" />
-        <!-- </div> -->
-
-
+        <NoteExpandedCard :language="language" :ID="selectedNote.ID" :title="selectedNote.title" :note="selectedNote.note" :color="selectedNote.color" @closeNote="closeNote" />
     </vue-final-modal>
 
 </template>
@@ -24,6 +24,7 @@
 import NoteCard from '../components/notes/note-card.vue';
 import NoteExpandedCard from '../components/notes/note-card-expand.vue';
 import { VueFinalModal } from 'vue-final-modal'
+import { getNotes, searchNotes, addNote } from '../services/notes-service'
 
 export default {
     components: {
@@ -34,82 +35,43 @@ export default {
     props: {
         language: String
     },
+    async mounted() {
+        this.notes = await getNotes();
+    },
     data: function() {
         return {
             showModal: false,
             selectedNote: {
-                    ID: 0,
-                    title: "",
-                    note: "",
-                    color: "",
-                 },
-            notes: [
-                {
-                    ID: 1,
-                    title: "Ejemplo",
-                    note: "<h1>Un ejemplazo jajaja siganlo por que es un ejemplo a seguir</h1>",
-                    color: "bg-zinc-800",
-                },
-                {
-                    ID: 2,
-                    title: "Ejemplo",
-                    note: "Un ejemplazo jajaja siganlo por que es un ejemplo a seguir",
-                    color: "bg-red-800",
-                },
-                {
-                    ID: 3,
-                    title: "Ejemplo",
-                    note: "Hola nota 1",
-                    color: "bg-yellow-800",
-                },
-                {
-                    ID: 4,
-                    title: "Ejemplo",
-                    note: "Noto una cosa",
-                    color: "bg-green-800",
-                },
-                {
-                    ID: 5,
-                    title: "Ejemplo",
-                    note: "jkjkjkjkjkjkjkjk",
-                    color: "bg-blue-800",
-                },
-                {
-                    ID: 6,
-                    title: "Ejemplo",
-                    note: "qwejieqewqljwejlweqjkejqjlkwqljkewq",
-                    color: "bg-purple-800",
-                },
-                {
-                    ID: 7,
-                    title: "Ejemplo",
-                    note: "dsakjsdlaksjalksad",
-                    color: "bg-pink-800",
-                },
-                {
-                    ID: 8,
-                    title: "Ejemplo",
-                    note: "<h1><strong>Titulo loco</strong></h1><p>Hola a todos soy el anticristo 2007 y les vengo a hablar sobre los homosexuales XDDD</p><h2>Son jotos, no mamen, matenlos</h2>",
-                    color: "bg-indigo-800",
-                },
-                {
-                    ID: 9,
-                    title: "Ejemplo",
-                    note: "Otro texto",
-                    color: "bg-orange-800",
-                },
-            ]
+                ID: 0,
+                title: "",
+                note: "",
+                color: "",
+            },
+            notes: []
         };
     },
     methods: {
         setLanguage() {
         },
         expandNote(note) {
-            // console.log("putos", note, this.selectedNote)
             this.showModal = true;
             this.selectedNote = { ID: note.ID, title: note.title, note: note.note, color: note.color }
-            // console.log("putos", note, this.selectedNote)
-
+        },
+        async addNote() {
+            let newNote = await addNote();
+            this.selectedNote = { ID: newNote.ID, title: newNote.title, note: newNote.note, color: newNote.color };
+            this.showModal = true;
+        },
+        async searchNotes() {
+            if (this.$refs.searchBar.value === '') {
+                this.notes = await getNotes();
+            } else {    
+                this.notes = await searchNotes(this.$refs.searchBar.value);
+            }        
+        },
+        async closeNote() {
+            this.showModal = false;
+            this.notes = await getNotes();
         }
     },
     watch: {
@@ -124,6 +86,10 @@ export default {
 <style scoped>
     .h-96vh{
         height: 96vh;
+    }
+
+    .h-88vh{
+        height: 88vh;
     }
 
     div::-webkit-scrollbar {

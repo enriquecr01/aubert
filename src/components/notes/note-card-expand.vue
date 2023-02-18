@@ -3,7 +3,7 @@
 
         <div :class="`flex flex-col w-full ${colorNote.replace('bg', 'border')} h-screen md:h-screen lg:max-h-96 rounded-lg shadow-lg ${colorNote} hover:${colorNote.replace('800','700')} ease-linear transition-all duration-150`">
           <div class="py-3 px-3">
-            <input :class="`w-full bg-transparent font-medium text-gray-50 px-3 py-2 pr-14 border border-transparent rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${colorNote.replace('bg', 'ring')} ease-linear transition-all duration-150`" v-model="titleNote">
+            <input :class="`w-full bg-transparent font-medium text-gray-50 px-3 py-2 pr-14 border border-transparent rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${colorNote.replace('bg', 'ring')} ease-linear transition-all duration-150`" placeholder="..." v-model="titleNote">
           </div>
           <main class="p-3 mb-auto text-gray-200">
             <QuillEditor theme="bubble" :content="content" contentType="html" placeholder="..." @update:content="onWrite" />
@@ -22,20 +22,40 @@
           </div>
 
           <div class="p-3 text-gray-100">
-            <button class="text-white mr-3 mb-1 px-3 py-2 rounded-full float-left p-ripple" v-ripple @click="appearDivColors">
+            <button class="text-white mb-1 px-3 py-2 rounded-full float-left p-ripple" v-ripple @click="appearDivColors">
               <i class="pi pi-palette p-button-icon"></i>
             </button>
+            <button class="text-white mb-1 px-3 py-2 rounded-full float-left p-ripple" v-ripple @click="showTemplate($event)">
+              <i class="pi pi-trash p-button-icon"></i>
+            </button>
 
+
+            
             <button class="text-white mr-3 mb-1 px-3 py-2 rounded float-right p-ripple" v-ripple @click="closeNote">
               {{ closeLabel }}
             </button>
+
+            <button class="text-white mr-3 mb-1 px-3 py-2 rounded float-right p-ripple" v-ripple @click="closeNote" v-if="savingLoader">
+              <i class="pi pi-spin pi-spinner"></i>
+              Guardando
+            </button>
           </div>
         </div>
+
+        <ConfirmPopup group="demo">
+        <template #message="slotProps">
+            <div class="flex p-4 bg-gray-900 text-gray-50">
+                <i :class="slotProps.message.icon" style="font-size: 1.5rem"></i>
+                <p class="pl-2">{{slotProps.message.message}}</p>
+            </div>
+        </template>
+    </ConfirmPopup>
 
 </template>
     
 <script>
 import { getWord } from '../../languages';
+import { deleteNote, updateNote } from '../../services/notes-service';
 
   export default {
     name: "NoteCardExpand",
@@ -64,20 +84,34 @@ import { getWord } from '../../languages';
           selectedLang: "MX",
           closeLabel: "",
           classDivColors: "",
+          confirmDeleteNote: "",
+          yesLabel: "",
+          noLabel: "",
+          noteDeletedTitle: "",
+          savingLoader: false,
         }
     },
     methods: {
       onWrite(event) {
         this.content = event;
       },
-      saveNote() {
-        console.log("voy a guardar esta madre", this.content);
+      async saveNote() {
+        this.savingLoader = true;
+        await updateNote(this.ID, this.titleNote, this.content, this.colorNote);
+        this.savingLoader = false;
+
       },
-      closeNote() {
+      async closeNote() {
         this.$emit("closeNote", true);
+        await this.saveNote();
       },
       setLanguage() {
         this.closeLabel = getWord(this.selectedLang, "closeLabel");
+        this.confirmDeleteNote = getWord(this.selectedLang, "confirmDeleteNote");
+        this.yesLabel = getWord(this.selectedLang, "yesLabel");
+        this.noLabel = getWord(this.selectedLang, "noLabel");
+        this.noteDeletedTitle = getWord(this.selectedLang, "noteDeletedTitle");
+        
       },
       appearDivColors() {
         if (this.classDivColors === `${this.colorNote.replace('800', '900')} hidden rounded`) {
@@ -92,7 +126,33 @@ import { getWord } from '../../languages';
       previsualizeColor(color) {
         this.colorNote = color;
         this.classDivColors = `${this.colorNote.replace('800', '900')} flex overflow-x-auto rounded`;
-      }
+      },
+      showTemplate(event) {
+        this.$confirm.require({
+            target: event.currentTarget,
+            group: 'demo',
+            message: this.confirmDeleteNote,
+            icon: 'pi pi-exclamation-triangle',
+            acceptIcon: 'pi pi-check',
+            rejectIcon: 'pi pi-times',
+            acceptClass: 'p-button-danger',
+            rejectClass: 'p-button-info',
+            acceptLabel: this.yesLabel,
+            rejectLabel: this.noLabel,
+            accept: async () => {
+                let response = await deleteNote(this.ID);
+                if (response.status === 0) {
+                    this.$toast.add({severity:'success', summary: this.noteDeletedTitle, life: 3000});
+                } else {
+                    this.$toast.add({severity:'warn', summary: this.passwordFailedTitle, detail: this.passwordFailedMessage, life: 3000});
+                }
+                this.$emit("closeNote", true);
+            },
+            reject: () => {
+                console.log('NO ELIMINADO')
+            }
+        });
+    },
     },
     watch: {
       ID() {

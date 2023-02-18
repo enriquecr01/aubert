@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Password from './pages/password.vue';
 import Notes from './pages/notes.vue';
-import WiFiPassword from './pages/wifi-password.vue';
 import Login from './pages/login.vue';
 import Landing from './pages/landing.vue';
 import Register from './pages/register.vue';
@@ -18,11 +17,6 @@ export const router = createRouter({
                 {
                     path: "/password",
                     component: Password,
-                    meta: { requiresAuth: true }
-                },
-                {
-                    path: "/wifipassword",
-                    component: WiFiPassword,
                     meta: { requiresAuth: true }
                 },
                 {

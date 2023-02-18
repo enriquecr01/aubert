@@ -54,15 +54,9 @@ export default {
       nameUser: '',
       items: [
         {
-          label: "XD",
+          label: "Contraseñas",
           icon: "pi pi-fw pi-key",
           to: "/password",
-          method: this.noFunction
-        },
-        {
-          label: "Contraseñas de Wi-Fi",
-          icon: "pi pi-fw pi-wifi",
-          to: "/wifipassword",
           method: this.noFunction
         },
         {
@@ -89,9 +83,8 @@ export default {
     setLanguage() {
       console.log(this.selectedLang)
       this.items[0].label = getWord(this.selectedLang, "passwords");
-      this.items[1].label = getWord(this.selectedLang, "passwordswifi");
-      this.items[2].label = getWord(this.selectedLang, "notes");
-      this.items[3].label = getWord(this.selectedLang, "logout");
+      this.items[1].label = getWord(this.selectedLang, "notes");
+      this.items[2].label = getWord(this.selectedLang, "logout");
 
       this.$emit("changeLanguage", this.selectedLang);
     },
