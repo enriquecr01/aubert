@@ -36,7 +36,11 @@
 
           <div class="text-center lg:text-left">
 
-            <button class="bg-blue-600 text-white font-medium m-1 px-7 py-3 rounded shadow-md p-ripple hover:bg-blue-800 transition duration-200 ease-in-out" v-ripple @click="attemptLogin">{{loginLabel}}</button>
+            <button :disabled="loading" :class="`${buttonClass} text-white font-medium m-1 px-7 py-3 rounded p-ripple`" v-ripple @click="attemptLogin">
+              <i class="pi pi-spin pi-spinner" v-if="loading"></i>
+              
+              {{loginLabel}}
+            </button>
 
             <p class="text-sm font-semibold mt-2 pt-1 mb-0">
               {{noAccountLabel}}
@@ -80,6 +84,8 @@ export default {
       loginLabel: '',
       noAccountLabel: '',
       registerLabel: '',
+      loading: false,
+      buttonClass: "bg-blue-600 hover:bg-blue-800 transition duration-200 ease-in-out shadow-md",
     }
   },
   methods: {
@@ -93,7 +99,12 @@ export default {
     },
     async attemptLogin() {
       let response = {};
+      this.loading = true;
+      this.buttonClass = "bg-blue-300";
       response = await login(this.email, this.password);
+
+      this.loading = false;
+      this.buttonClass = "bg-blue-600 hover:bg-blue-800 transition duration-200 ease-in-out shadow-md";
 
       if (response.errorStatus) {
         this.errorLogin = true;

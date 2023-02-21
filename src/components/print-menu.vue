@@ -1,6 +1,6 @@
 <template>
       <div class="flex items-center space-x-4 p-2 mb-5">
-      <img class="h-12 rounded-full" src="http://www.gravatar.com/avatar/2acfb745ecf9d4dccb3364752d17f65f?s=260&d=mp" alt="James Bhatta" />
+      <img class="h-12 rounded-full" :src="`https://api.dicebear.com/5.x/open-peeps/svg?seed=${nameUser.replace(/ /g,'')}`" alt="James Bhatta" />
       <div>
         <h4 class="font-semibold text-lg text-gray-300 capitalize font-poppins tracking-wide">
           {{ nameUser }}

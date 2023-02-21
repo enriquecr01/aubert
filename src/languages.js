@@ -45,6 +45,7 @@ const languages = {
         sessionFoundTitleNoButtonLabel: "Por favor cierra esta ventana y ve a la que esta abierta la aplicacion.",
         confirmDeleteNote: '¿Quieres eliminar esta nota?',
         noteDeletedTitle: '¡Nota eliminada!',
+        savingLabel: 'Guardando',
 
     }, 
     EN: {
@@ -93,6 +94,7 @@ const languages = {
         sessionFoundTitleNoButtonLabel: "Please close this window and go to the one where the application is open.",
         confirmDeleteNote: 'You want to delete this note?',
         noteDeletedTitle: 'Note deleted!',
+        savingLabel: 'Saving',
 
     },
     FR: {
@@ -141,6 +143,7 @@ const languages = {
         sessionFoundTitleNoButtonLabel: "Veuillez fermer cette fenêtre et vous rendre dans celle où l'application est ouverte.",
         confirmDeleteNote: 'Voulez-vous supprimer ce note?',
         noteDeletedTitle: 'Note supprimé!',
+        savingLabel: 'Enregistrement',
 
     }
 }

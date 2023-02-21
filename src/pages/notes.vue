@@ -9,6 +9,16 @@
         </div>
 
         <div class="grid h-88vh lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 p-3 bg-gray-700 rounded auto-rows-min" style="overflow-y:scroll;" >
+        
+            <Skeleton height="15rem" v-if="loadNotes"></Skeleton>
+            <Skeleton height="15rem" v-if="loadNotes"></Skeleton>
+            <Skeleton height="15rem" v-if="loadNotes"></Skeleton>
+            <Skeleton height="15rem" v-if="loadNotes"></Skeleton>
+            <Skeleton height="15rem" v-if="loadNotes"></Skeleton>
+            <Skeleton height="15rem" v-if="loadNotes"></Skeleton>
+            <Skeleton height="15rem" v-if="loadNotes"></Skeleton>
+            <Skeleton height="15rem" v-if="loadNotes"></Skeleton>
+            
             <NoteCard v-for="(note, index) in notes" :key="index" :ID="note.ID" :title="note.title" :note="note.note" :color="note.color" @expandNote="expandNote" />
         </div>
 
@@ -37,6 +47,7 @@ export default {
     },
     async mounted() {
         this.notes = await getNotes();
+        this.loadNotes = false;
     },
     data: function() {
         return {
@@ -47,6 +58,7 @@ export default {
                 note: "",
                 color: "",
             },
+            loadNotes: true,
             notes: []
         };
     },
@@ -64,9 +76,13 @@ export default {
         },
         async searchNotes() {
             if (this.$refs.searchBar.value === '') {
+                this.loadNotes = true;
                 this.notes = await getNotes();
+                this.loadNotes = false;
             } else {    
+                this.loadNotes = true;
                 this.notes = await searchNotes(this.$refs.searchBar.value);
+                this.loadNotes = false;
             }        
         },
         async closeNote() {
@@ -76,8 +92,8 @@ export default {
     },
     watch: {
         language(newValue) {
-        this.selectedLang = newValue;
-        this.setLanguage()
+            this.selectedLang = newValue;
+            this.setLanguage();
         },
     },
 }
@@ -104,4 +120,9 @@ export default {
         border-radius: 20px;
         background-color: rgba(17, 24, 39, 1);
     }
+
+    .p-skeleton {
+        background-color: #1e293b;
+    }
+    
 </style>

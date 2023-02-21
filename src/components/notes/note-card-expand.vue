@@ -37,7 +37,7 @@
 
             <button class="text-white mr-3 mb-1 px-3 py-2 rounded float-right p-ripple" v-ripple @click="closeNote" v-if="savingLoader">
               <i class="pi pi-spin pi-spinner"></i>
-              Guardando
+              {{ savingLabel }}
             </button>
           </div>
         </div>
@@ -87,6 +87,7 @@ import { deleteNote, updateNote } from '../../services/notes-service';
           confirmDeleteNote: "",
           yesLabel: "",
           noLabel: "",
+          savingLabel: "",
           noteDeletedTitle: "",
           savingLoader: false,
         }
@@ -111,7 +112,7 @@ import { deleteNote, updateNote } from '../../services/notes-service';
         this.yesLabel = getWord(this.selectedLang, "yesLabel");
         this.noLabel = getWord(this.selectedLang, "noLabel");
         this.noteDeletedTitle = getWord(this.selectedLang, "noteDeletedTitle");
-        
+        this.savingLabel = getWord(this.selectedLang, "savingLabel");
       },
       appearDivColors() {
         if (this.classDivColors === `${this.colorNote.replace('800', '900')} hidden rounded`) {

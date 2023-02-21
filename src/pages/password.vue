@@ -8,6 +8,65 @@
                 <button class="w-1/6 bg-blue-700 text-white px-3 py-2 rounded border border-blue-700 p-ripple" v-ripple @click="openModalAdd"> <i class=" pi pi-plus p-button-icon"></i> </button>
             </div>
 
+            <div class="custom-skeleton p-4" v-if="loadingPasswords">
+                <ul class="m-0 p-0">
+                    <li class="mb-3">
+                        <div class="flex">
+                            <Skeleton shape="circle" size="4rem" class="mr-2"></Skeleton>
+                            <div style="flex: 1">
+                                <Skeleton width="100%" class="mb-2"></Skeleton>
+                                <Skeleton width="75%"></Skeleton>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="mb-3">
+                        <div class="flex">
+                            <Skeleton shape="circle" size="4rem" class="mr-2"></Skeleton>
+                            <div style="flex: 1">
+                                <Skeleton width="100%" class="mb-2"></Skeleton>
+                                <Skeleton width="75%"></Skeleton>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="mb-3">
+                        <div class="flex">
+                            <Skeleton shape="circle" size="4rem" class="mr-2"></Skeleton>
+                            <div style="flex: 1">
+                                <Skeleton width="100%" class="mb-2"></Skeleton>
+                                <Skeleton width="75%"></Skeleton>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex">
+                            <Skeleton shape="circle" size="4rem" class="mr-2"></Skeleton>
+                            <div style="flex: 1">
+                                <Skeleton width="100%" class="mb-2"></Skeleton>
+                                <Skeleton width="75%"></Skeleton>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex">
+                            <Skeleton shape="circle" size="4rem" class="mr-2"></Skeleton>
+                            <div style="flex: 1">
+                                <Skeleton width="100%" class="mb-2"></Skeleton>
+                                <Skeleton width="75%"></Skeleton>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex">
+                            <Skeleton shape="circle" size="4rem" class="mr-2"></Skeleton>
+                            <div style="flex: 1">
+                                <Skeleton width="100%" class="mb-2"></Skeleton>
+                                <Skeleton width="75%"></Skeleton>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
             <Password v-for="(pass, index) in passwords" :key="index" :lang="language" :url="pass.url" :name="pass.name" :user="pass.user" :color="pass.color" :secret="pass.secret" :notes="pass.notes" :id="pass.ID" @showPassword="putPassword" />
         </div>
         <div :class="[Object.keys(selectedPassword).length === 0 ? classInstructions : classSelected]" style="overflow-y:scroll;">
@@ -65,6 +124,7 @@ export default {
         this.selectedLang = localStorage.getItem("language");
         this.setLanguage();
         this.passwords = await getPasswords();
+        this.loadingPasswords = false;
         window.addEventListener("resize", this.resizedWindow);
         this.setClassesOnResize(window.innerWidth);
     },
@@ -81,6 +141,7 @@ export default {
             showModal: false,
             mobile: false,
             showModalAdd: false,
+            loadingPasswords: true,
             passwords: []
         };
     },
@@ -123,9 +184,13 @@ export default {
     },
     async searchPasswords() {
         if (this.$refs.searchBar.value === '') {
+            this.loadingPasswords = true;
             this.passwords = await getPasswords();
+            this.loadingPasswords = false;
         } else {    
+            this.loadingPasswords = true;
             this.passwords = await searchPasswords(this.$refs.searchBar.value);
+            this.loadingPasswords = false;
         }        
     },
     async actionPasswordDone(value) {
@@ -169,6 +234,10 @@ export default {
 
     .h-96vh{
         height: 96vh;
+    }
+
+    .p-skeleton {
+        background-color: #1e293b;
     }
 
 </style>
