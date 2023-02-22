@@ -9,6 +9,11 @@ import './assets/tailwind.css';
 export default {
   components: {
   },
+  mounted() {
+    if (localStorage.getItem("language") === undefined) {
+      localStorage.setItem("language", "MX")
+    }
+  },
   data() {
     return {
       language: localStorage.getItem("language"),
