@@ -10,6 +10,7 @@ export default {
   components: {
   },
   mounted() {
+    console.log(localStorage.getItem("language"))
     if (localStorage.getItem("language") === undefined) {
       localStorage.setItem("language", "MX")
     }
