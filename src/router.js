@@ -49,13 +49,11 @@ export const router = createRouter({
 router.beforeEach((to, from) => {
     let id = localStorage.getItem('id');
 
-    console.log("XDDDD", from)
-
-    // if (to.fullPath === '/login' || to.fullPath === '/') {
-    //     if (id !== null) {
-    //         router.push('/session-found')
-    //     }
-    // }
+    if (to.fullPath === '/login' || to.fullPath === '/') {
+        if (id !== null) {
+            router.push('/session-found')
+        }
+    }
 
     if (to.meta.requiresAuth) {
         if (id === null) {
@@ -63,13 +61,13 @@ router.beforeEach((to, from) => {
         }
     }
 
-    // if (from.fullPath === "/") {
-    //     if (to.meta.requiresAuth) {
-    //         if (id !== null) {
-    //             router.push('/session-found')
-    //         }
-    //     }
-    // }
+    if (from.fullPath === "/") {
+        if (to.meta.requiresAuth) {
+            if (id !== null) {
+                router.push('/session-found')
+            }
+        }
+    }
 
 
 }) 

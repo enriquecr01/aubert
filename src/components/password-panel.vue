@@ -213,7 +213,7 @@ export default {
                 this.$emit('passwordUpdated', 'deleted')
             },
             reject: () => {
-                console.log('NO ELIMINADO')
+                console.log('NO SE PUDO ELIMINAR PASSWORD')
             }
         });
     },

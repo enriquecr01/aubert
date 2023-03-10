@@ -46,6 +46,8 @@ const languages = {
         confirmDeleteNote: '¿Quieres eliminar esta nota?',
         noteDeletedTitle: '¡Nota eliminada!',
         savingLabel: 'Guardando',
+        searchNotesLabel: 'Buscar Notas',
+        searchPasswordLabel: 'Buscar Contraseñas',
 
     }, 
     EN: {
@@ -95,6 +97,8 @@ const languages = {
         confirmDeleteNote: 'You want to delete this note?',
         noteDeletedTitle: 'Note deleted!',
         savingLabel: 'Saving',
+        searchNotesLabel: 'Search Notes',
+        searchPasswordLabel: 'Search Passwords',
 
     },
     FR: {
@@ -144,6 +148,8 @@ const languages = {
         confirmDeleteNote: 'Voulez-vous supprimer ce note?',
         noteDeletedTitle: 'Note supprimé!',
         savingLabel: 'Enregistrement',
+        searchNotesLabel: 'Notes de Recherche',
+        searchPasswordLabel: 'Rechercher des mots de passe',
 
     }
 }

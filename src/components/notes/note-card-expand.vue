@@ -150,7 +150,7 @@ import { deleteNote, updateNote } from '../../services/notes-service';
                 this.$emit("closeNote", true);
             },
             reject: () => {
-                console.log('NO ELIMINADO')
+                console.log('NO SE PUDO ELIMINAR LA NOTA')
             }
         });
     },

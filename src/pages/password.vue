@@ -4,7 +4,7 @@
     <div :class="controlColumnsGrid">
         <div class="bg-gray-700 shadow-white h-96vh rounded" style="overflow-y:scroll;">
             <div class="bg-gray-600 p-4">
-                <input class="w-4/5 bg-gray-700 mr-2 text-gray-50 px-3 py-2 border border-gray-700  border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150" type="text" placeholder="Buscar contraseña" ref="searchBar" v-on:keyup="searchPasswords" >
+                <input class="w-4/5 bg-gray-700 mr-2 text-gray-50 px-3 py-2 border border-gray-700  border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150" type="text" :placeholder="searchPasswordLabel" id="searchPassword" ref="searchBar" v-on:keyup="searchPasswords" >
                 <button class="w-1/6 bg-blue-700 text-white px-3 py-2 rounded border border-blue-700 p-ripple" v-ripple @click="openModalAdd"> <i class=" pi pi-plus p-button-icon"></i> </button>
             </div>
 
@@ -135,6 +135,7 @@ export default {
         return {
             controlColumnsGrid: "grid grid-cols-2 gap-4 h-96vh",
             instructions: 'xd',
+            searchPasswordLabel: 'no',
             selectedPassword: {},
             classSelected: 'bg-gray-700 h-96vh rounded',
             classInstructions: 'grid h-screen place-items-center bg-gray-700 h-96vh rounded',
@@ -155,6 +156,7 @@ export default {
     setLanguage() {
       this.instructions = getWord(this.selectedLang, "instructions");
       this.titleEdit= getWord(this.selectedLang, "titleEdit");
+      this.searchPasswordLabel= getWord(this.selectedLang, "searchPasswordLabel");
     },
     resizedWindow(e) {
         // This is for make reactive columns

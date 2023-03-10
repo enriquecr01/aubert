@@ -81,7 +81,6 @@ export default {
       this.setLanguage();
     },
     setLanguage() {
-      console.log(this.selectedLang)
       this.items[0].label = getWord(this.selectedLang, "passwords");
       this.items[1].label = getWord(this.selectedLang, "notes");
       this.items[2].label = getWord(this.selectedLang, "logout");

@@ -3,7 +3,7 @@
     <div class=" h-96vh">
         <div class="bg-gray-700 shadow-white">
             <div class="bg-gray-600 p-4">
-                <input class="w-4/5 bg-gray-700 mr-2 text-gray-50 px-3 py-2 border border-gray-700  border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150" type="text" placeholder="Buscar Nota" ref="searchBar" v-on:keyup="searchNotes" >
+                <input class="w-4/5 bg-gray-700 mr-2 text-gray-50 px-3 py-2 border border-gray-700  border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150" type="text" id="searchNotes" :placeholder="searchNotesLabel" ref="searchBar" v-on:keyup="searchNotes" >
                 <button class="w-1/6 bg-blue-700 text-white px-3 py-2 rounded border border-blue-700 p-ripple" v-ripple @click="addNote"> <i class=" pi pi-plus p-button-icon"></i> </button>
             </div>
         </div>
@@ -35,6 +35,8 @@ import NoteCard from '../components/notes/note-card.vue';
 import NoteExpandedCard from '../components/notes/note-card-expand.vue';
 import { VueFinalModal } from 'vue-final-modal'
 import { getNotes, searchNotes, addNote } from '../services/notes-service'
+import { getWord } from "../languages.js";
+
 
 export default {
     components: {
@@ -52,6 +54,7 @@ export default {
     data: function() {
         return {
             showModal: false,
+            searchNotesLabel: 'no',
             selectedNote: {
                 ID: 0,
                 title: "",
@@ -64,6 +67,7 @@ export default {
     },
     methods: {
         setLanguage() {
+            this.searchNotesLabel = getWord(this.selectedLang, "searchNotesLabel");
         },
         expandNote(note) {
             this.showModal = true;
