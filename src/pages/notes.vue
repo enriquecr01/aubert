@@ -67,7 +67,7 @@ export default {
                 color: "",
             },
             loadNotes: true,
-            clickOutsideModalFlag: false,
+            clickOutsideModalFlag: false, // Si el usuario hace clic afuera del modal, obliga a guardar lo que tiene la nota
             notes: []
         };
     },
@@ -99,6 +99,7 @@ export default {
             }        
         },
          async closeNote(note) {
+            // Si no tiene index significa que es una nota nueva
             if (note.index) {
                 this.notes[note.index] = note;
             } else {
