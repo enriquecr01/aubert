@@ -111,6 +111,9 @@ import { VueFinalModal } from 'vue-final-modal'
 
 
 export default {
+    title () {
+        return getWord(localStorage.getItem("language"), "passwords") + " | Aubert";
+    },
     props: {
         language: String
     },
@@ -143,6 +146,7 @@ export default {
             mobile: false,
             showModalAdd: false,
             loadingPasswords: true,
+            passwordTitleBrowser: "xd",
             passwords: []
         };
     },
@@ -155,8 +159,9 @@ export default {
     },
     setLanguage() {
       this.instructions = getWord(this.selectedLang, "instructions");
-      this.titleEdit= getWord(this.selectedLang, "titleEdit");
-      this.searchPasswordLabel= getWord(this.selectedLang, "searchPasswordLabel");
+      this.titleEdit = getWord(this.selectedLang, "titleEdit");
+      this.searchPasswordLabel = getWord(this.selectedLang, "searchPasswordLabel");
+      this.passwordTitleBrowser = getWord(this.selectedLang, "passwords");
     },
     resizedWindow(e) {
         // This is for make reactive columns

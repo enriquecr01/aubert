@@ -21,10 +21,11 @@ export default {
         title: String,
         note: String,
         color: String,
+        indexNote: Number,
     },
     methods: {
         expandNote() {
-            this.$emit("expandNote", {  ID: this.ID, title: this.title, note: this.note, color: this.color })
+            this.$emit("expandNote", {  ID: this.ID, title: this.title, note: this.note, color: this.color, index: this.indexNote })
         }
     }
 }

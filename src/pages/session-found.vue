@@ -24,6 +24,9 @@
 import { getWord } from "../languages.js";
 
 export default {
+    title () {
+        return getWord(localStorage.getItem("language"), "sessionFoundTitle") + " | Aubert";
+    },
     name: "SessionFound",
     mounted() {
         this.selectedLang = localStorage.getItem("language");

@@ -101,7 +101,8 @@ import VirtualScroller from 'primevue/virtualscroller';
 
 import Vidle from 'v-idle-3';
 
-import { QuillEditor } from '@vueup/vue-quill'
+import { QuillEditor } from '@vueup/vue-quill';
+import titleMixin from './mixins/titleMixin'
 
 import '@vueup/vue-quill/dist/vue-quill.bubble.css';
 
@@ -214,5 +215,8 @@ app.component('TreeSelect', TreeSelect);
 app.component('TreeTable', TreeTable);
 app.component('TriStateCheckbox', TriStateCheckbox);
 app.component('VirtualScroller', VirtualScroller);
+
+app.mixin(titleMixin)
+
 
 app.mount('#app')

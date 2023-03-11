@@ -64,7 +64,9 @@ import { getWord } from "../languages.js";
 
 
 export default {
-
+  title () {
+    return getWord(localStorage.getItem("language"), "loginLabel") + " | Aubert";
+  },
   components: {
     MenuBar
   },

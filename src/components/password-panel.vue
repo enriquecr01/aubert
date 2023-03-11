@@ -19,7 +19,7 @@
         </div>
 
         <div class="w-full my-4">
-            <button :class="`${ color } text-white mr-3 mb-1 px-3 py-2 rounded-full p-ripple`" @click="focusUsername" v-ripple> <i class=" pi pi-user p-button-icon"></i> </button>
+            <button :class="`${ color } text-white mr-3 mb-1 px-3 py-2 rounded-full p-ripple`" @click="copyClipboardUsername" v-ripple> <i class=" pi pi-user p-button-icon"></i> </button>
             <label class="text-md font-medium text-gray-50">{{ usernameLabel }}</label>
             <input :class="`w-full bg-gray-600 text-gray-50 px-3 py-2 border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${color.replace('bg', 'ring')} ease-linear transition-all duration-150`" type="text" ref="username" placeholder="example@gmail.com" v-model="username">
         </div>
@@ -179,8 +179,8 @@ export default {
     copyClipboard() {
         navigator.clipboard.writeText(this.selectedPassword.secret);
     },
-    focusUsername() {
-        this.$refs.username.focus();
+    copyClipboardUsername() {
+        navigator.clipboard.writeText(this.username);
     },
     focusNotes() {
         this.$refs.notes.focus();

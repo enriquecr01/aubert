@@ -59,13 +59,15 @@ import { deleteNote, updateNote } from '../../services/notes-service';
 
   export default {
     name: "NoteCardExpand",
-    emits: [ "closeNote" ],
+    emits: [ "closeNote", "updateNote" ],
     props: {
       ID: Number,
       title: String,
       note: String,
       color: String,
+      index: Number,
       language: String,
+      clickOutsideModalFlag: Boolean,
     },
     components: {
     },
@@ -99,12 +101,13 @@ import { deleteNote, updateNote } from '../../services/notes-service';
       async saveNote() {
         this.savingLoader = true;
         await updateNote(this.ID, this.titleNote, this.content, this.colorNote);
+        this.$emit("updateNote", { ID: this.ID, title: this.titleNote, note: this.content, color: this.colorNote, index: this.index  });
         this.savingLoader = false;
 
       },
       async closeNote() {
-        this.$emit("closeNote", true);
         await this.saveNote();
+        this.$emit("closeNote", { ID: this.ID, title: this.titleNote, note: this.content, color: this.colorNote, index: this.index });
       },
       setLanguage() {
         this.closeLabel = getWord(this.selectedLang, "closeLabel");
@@ -128,6 +131,7 @@ import { deleteNote, updateNote } from '../../services/notes-service';
         this.colorNote = color;
         this.classDivColors = `${this.colorNote.replace('800', '900')} flex overflow-x-auto rounded`;
       },
+
       showTemplate(event) {
         this.$confirm.require({
             target: event.currentTarget,
@@ -173,6 +177,11 @@ import { deleteNote, updateNote } from '../../services/notes-service';
         this.selectedLang = newValue;
         this.setLanguage();
       },
+      clickOutsideModalFlag(newValue) {
+        if (newValue) {
+          this.closeNote();
+        }
+      }
     },
   };
 </script>

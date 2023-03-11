@@ -48,6 +48,8 @@ const languages = {
         savingLabel: 'Guardando',
         searchNotesLabel: 'Buscar Notas',
         searchPasswordLabel: 'Buscar Contraseñas',
+        sessionFoundTitle: 'Sesión encontrada',
+        landingPageTitle: 'Aplicacion que te ayuda a gestionar tus contraseñas y notas',
 
     }, 
     EN: {
@@ -99,6 +101,8 @@ const languages = {
         savingLabel: 'Saving',
         searchNotesLabel: 'Search Notes',
         searchPasswordLabel: 'Search Passwords',
+        sessionFoundTitle: 'Session Found',
+        landingPageTitle: 'Application that helps you manage your passwords and notes',
 
     },
     FR: {
@@ -150,6 +154,8 @@ const languages = {
         savingLabel: 'Enregistrement',
         searchNotesLabel: 'Notes de Recherche',
         searchPasswordLabel: 'Rechercher des mots de passe',
+        sessionFoundTitle: 'Séance Trouvée',
+        landingPageTitle: 'Application qui vous aide à gérer vos mots de passe et vos notes',
 
     }
 }

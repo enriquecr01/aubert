@@ -34,6 +34,9 @@ import MenuBar from '../components/landing-login/menu-bar.vue';
 import { getWord } from "../languages.js";
 
 export default {
+    title () {
+      return getWord(localStorage.getItem("language"), "landingPageTitle") + " | Aubert";
+    },
     name: "landing",
     components: {
         MenuBar

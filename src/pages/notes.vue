@@ -19,13 +19,13 @@
             <Skeleton height="15rem" v-if="loadNotes"></Skeleton>
             <Skeleton height="15rem" v-if="loadNotes"></Skeleton>
             
-            <NoteCard v-for="(note, index) in notes" :key="index" :ID="note.ID" :title="note.title" :note="note.note" :color="note.color" @expandNote="expandNote" />
+            <NoteCard v-for="(note, index) in notes" :key="index" :ID="note.ID" :title="note.title" :note="note.note" :color="note.color" :indexNote="index" @expandNote="expandNote" />
         </div>
 
     </div> 
 
-    <vue-final-modal v-model="showModal" :esc-to-close="true" class="overflow-y-auto" classes="flex items-center" content-class="mx-auto lg:w-8/12 md:w-full w-full h-screen md:h-screen lg:max-h-80" >
-        <NoteExpandedCard :language="language" :ID="selectedNote.ID" :title="selectedNote.title" :note="selectedNote.note" :color="selectedNote.color" @closeNote="closeNote" />
+    <vue-final-modal v-model="showModal" :esc-to-close="true" @closed="clickOutsideModal" class="overflow-y-auto" classes="flex items-center" content-class="mx-auto lg:w-8/12 md:w-full w-full h-screen md:h-screen lg:max-h-80" >
+        <NoteExpandedCard :language="language" :ID="selectedNote.ID" :title="selectedNote.title" :note="selectedNote.note" :color="selectedNote.color" :index="selectedNote.index" :clickOutsideModalFlag="clickOutsideModalFlag" @closeNote="closeNote"  />
     </vue-final-modal>
 
 </template>
@@ -39,6 +39,9 @@ import { getWord } from "../languages.js";
 
 
 export default {
+    title () {
+        return getWord(localStorage.getItem("language"), "notes") + " | Aubert";
+    },
     components: {
         NoteCard,
         VueFinalModal,
@@ -48,6 +51,8 @@ export default {
         language: String
     },
     async mounted() {
+        this.selectedLang = localStorage.getItem("language");
+        this.setLanguage();
         this.notes = await getNotes();
         this.loadNotes = false;
     },
@@ -62,6 +67,7 @@ export default {
                 color: "",
             },
             loadNotes: true,
+            clickOutsideModalFlag: false,
             notes: []
         };
     },
@@ -71,12 +77,15 @@ export default {
         },
         expandNote(note) {
             this.showModal = true;
-            this.selectedNote = { ID: note.ID, title: note.title, note: note.note, color: note.color }
+            this.selectedNote = { ID: note.ID, title: note.title, note: note.note, color: note.color, index: note.index }
         },
         async addNote() {
             let newNote = await addNote();
             this.selectedNote = { ID: newNote.ID, title: newNote.title, note: newNote.note, color: newNote.color };
             this.showModal = true;
+        },
+        updateSingleNote(noteUpdated) {
+            this.notes[noteUpdated.index] = noteUpdated;
         },
         async searchNotes() {
             if (this.$refs.searchBar.value === '') {
@@ -89,9 +98,17 @@ export default {
                 this.loadNotes = false;
             }        
         },
-        async closeNote() {
+         async closeNote(note) {
+            if (note.index) {
+                this.notes[note.index] = note;
+            } else {
+                this.notes = await getNotes(); 
+            }
             this.showModal = false;
-            this.notes = await getNotes();
+            this.clickOutsideModalFlag = false;
+        },
+        clickOutsideModal() {
+            this.clickOutsideModalFlag = true;
         }
     },
     watch: {
