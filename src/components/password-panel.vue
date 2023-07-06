@@ -28,8 +28,8 @@
             <button :class="`${ color } text-white mr-3 mb-1 px-3 py-2 rounded-full p-ripple`" v-ripple v-tooltip.top="copy" @click="copyClipboard"> <i class=" pi pi-copy p-button-icon"></i> </button>
             <label class="text-md font-medium text-gray-50">{{ passwordLabel }}</label>
 
-            <div class="flex justify-end items-center relative">
-                <input :class="`w-full bg-gray-600 text-gray-50 px-3 py-2 pr-14 border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${color.replace('bg', 'ring')} ease-linear transition-all duration-150`" :type="typeTextPassword" :placeholder="passwordPlaceholder" v-model="secret">
+            <div class="flex justify-end items-center relative" v-tooltip.top="{ value: viewToAble, disabled: true }">
+                <input :class="`w-full bg-gray-600 text-gray-50 px-3 py-2 pr-14 border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${color.replace('bg', 'ring')} ease-linear transition-all duration-150`" :disabled="typeTextPassword === 'password'" :type="typeTextPassword" :placeholder="passwordPlaceholder" v-model="secret">
                 <div class="absolute inset-y-0 right-0 flex items-center pr-9" @click="passwordVisible">
                     <i :class="`pi ${visiblePasswordIcon} p-button-icon absolute text-gray-50`" v-tooltip.top="{ value: visiblePasswordIcon === 'pi-eye' ? showPassword : hidePassword, class: 'custom-error' }"></i>
                 </div>
@@ -80,7 +80,7 @@
 
 <script>
 import { getWord } from "../languages.js";
-import { updatePassword, deletePassword } from "../services/passwords-service";
+import { updatePassword, deletePassword, getDecryptedPassword } from "../services/passwords-service";
 
 export default {
     name: 'password-panel',
@@ -129,6 +129,7 @@ export default {
             passwordFailedTitle: 'no',
             passwordFailedMessage: 'no',
             passwordDeletedTitle: 'no',
+            viewToAble: 'no',
             visiblePasswordIcon: 'pi-eye',
             typeTextPassword: 'password',
         }
@@ -159,9 +160,12 @@ export default {
       this.passwordAddedTitle = getWord(this.selectedLang, "passwordAddedTitle");
       this.passwordFailedTitle = getWord(this.selectedLang, "passwordFailedTitle");
       this.passwordDeletedTitle = getWord(this.selectedLang, "passwordDeletedTitle");
+      this.viewToAble = getWord(this.selectedLang, "viewToAble");
     },
-    passwordVisible() {
+    async passwordVisible() {
         if (this.visiblePasswordIcon === 'pi-eye') {
+            const secret = await getDecryptedPassword(this.id);
+            this.secret = secret;
             this.visiblePasswordIcon = 'pi-eye-slash';
             this.typeTextPassword = 'text';
         } else {
@@ -176,8 +180,12 @@ export default {
             window.open(`https://www.${this.selectedPassword.url}`, '_blank').focus();
         }
     },
-    copyClipboard() {
-        navigator.clipboard.writeText(this.selectedPassword.secret);
+    async copyClipboard() {
+        const secret = await getDecryptedPassword(this.id);
+
+        console.log("puto jajaja", secret)
+
+        navigator.clipboard.writeText(secret);
     },
     copyClipboardUsername() {
         navigator.clipboard.writeText(this.username);
@@ -221,10 +229,13 @@ export default {
         this.username = password.user;
         this.name = password.name;
         this.url = password.url;
-        this.secret = password.secret;
+        this.secret = "********";
         this.notes = password.notes;
         this.color = password.color;
         this.id = password.id;
+        
+        this.visiblePasswordIcon = 'pi-eye';
+        this.typeTextPassword = 'password';
     },
     putValueURL() {
         this.url = this.$refs.url.value;

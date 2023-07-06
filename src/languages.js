@@ -50,7 +50,7 @@ const languages = {
         searchPasswordLabel: 'Buscar Contraseñas',
         sessionFoundTitle: 'Sesión encontrada',
         landingPageTitle: 'Aplicacion que te ayuda a gestionar tus contraseñas y notas',
-
+        viewToAble: 'Tienes que ver la contraseña para poder editarla.',
     }, 
     EN: {
         passwords: 'Passwords',
@@ -103,6 +103,7 @@ const languages = {
         searchPasswordLabel: 'Search Passwords',
         sessionFoundTitle: 'Session Found',
         landingPageTitle: 'Application that helps you manage your passwords and notes',
+        viewToAble: 'You have to see the password to be able to edit it.',
 
     },
     FR: {
@@ -156,6 +157,7 @@ const languages = {
         searchPasswordLabel: 'Rechercher des mots de passe',
         sessionFoundTitle: 'Séance Trouvée',
         landingPageTitle: 'Application qui vous aide à gérer vos mots de passe et vos notes',
+        viewToAble: 'Vous devez voir le mot de passe pour pouvoir le modifier.',
 
     }
 }

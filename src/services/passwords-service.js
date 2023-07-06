@@ -93,3 +93,14 @@ export async function deletePassword(id) {
     console.error(error);
   }
 }
+
+export async function getDecryptedPassword(id) {
+  try {
+    const response = await axios.get(
+      `https://aubert-go.onrender.com/password/decrypt/${id}`
+    );
+    return response.data.decrypted;
+  } catch (error) {
+    console.error(error);
+  }
+}

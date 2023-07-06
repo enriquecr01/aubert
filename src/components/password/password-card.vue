@@ -1,7 +1,7 @@
 <template>
 
   <div :class="`flex items-center gap-4 p-4 text-gray-300 rounded shadow-white1 hover:${ color } hover:text-gray-50`" @click="showPassword()">
-    <img class="w-12 h-12 rounded-md" :src="`https://logo.clearbit.com/${ url }`">
+    <img class="w-12 h-12 rounded-md" :src="`https://logo.clearbit.com/${ url }?size=100px`">
     <div class="flex flex-col">
       <strong class="text-sm font-medium">{{ name }}</strong>
       <span class="text-sm font-medium">{{ user }}</span>
