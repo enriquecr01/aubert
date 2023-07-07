@@ -1,6 +1,6 @@
 <template>
     <div :class="`flex items-center gap-4 p-4 rounded ${ color.replace('500', '800') } text-gray-50`">
-        <img class="rounded-md" :src="`https://logo.clearbit.com/${ url  }?size=100`">
+        <img class="rounded-md" :src="`https://logo.clearbit.com/${ altIcon ? 'clearbit.com' : url }?size=100`" @error="setAltIcon">
         <div class="flex flex-col">
             <strong class="text-3xl font-medium">{{ titleEdit }}</strong>
             <span class="text-3xl">{{ name }}</span>
@@ -132,6 +132,7 @@ export default {
             viewToAble: 'no',
             visiblePasswordIcon: 'pi-eye',
             typeTextPassword: 'password',
+            altIcon: false,
         }
     },
   methods: {
@@ -238,6 +239,7 @@ export default {
         this.typeTextPassword = 'password';
     },
     putValueURL() {
+        this.altIcon = false;
         this.url = this.$refs.url.value;
     },
     async saveChanges() {
@@ -249,6 +251,9 @@ export default {
         }
 
         this.$emit('passwordUpdated', 'update')
+    },
+    setAltIcon() {
+      this.altIcon = true;
     },
   },
   watch: {

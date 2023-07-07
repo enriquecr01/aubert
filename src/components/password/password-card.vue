@@ -1,7 +1,7 @@
 <template>
 
   <div :class="`flex items-center gap-4 p-4 text-gray-300 rounded shadow-white1 hover:${ color } hover:text-gray-50`" @click="showPassword()">
-    <img class="w-12 h-12 rounded-md" :src="`https://logo.clearbit.com/${ url }?size=100px`">
+    <img class="w-12 h-12 rounded-md" :src="`https://logo.clearbit.com/${ altIcon ? 'clearbit.com' : url }?size=100px`" @error="setAltIcon">
     <div class="flex flex-col">
       <strong class="text-sm font-medium">{{ name }}</strong>
       <span class="text-sm font-medium">{{ user }}</span>
@@ -29,6 +29,7 @@ export default {
   mounted() {
     this.selectedLang = localStorage.getItem("language");
     this.setLanguage();
+    this.altIcon = false;
   },
   data: function() {
     return {
@@ -36,9 +37,13 @@ export default {
       gosite: "xd",
       edit: "xd",
       deletepass: "xd",
+      altIcon: false,
     };
   },
   methods: {
+    setAltIcon() {
+      this.altIcon = true;
+    },
     setLanguage() {
       this.copy = getWord(this.selectedLang, "copy");
       this.gosite = getWord(this.selectedLang, "gosite");
@@ -53,6 +58,9 @@ export default {
     lang(newValue) {
       this.selectedLang = newValue;
       this.setLanguage()
+    },
+    url() {
+      this.altIcon = false;
     },
   },
 };
