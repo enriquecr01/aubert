@@ -25,11 +25,11 @@
           <Message severity="error" v-if="errorLogin" :closable="false" :life="3000">Bad credentials. Try again please.</Message>
 
           <div class="mb-6">
-            <input class="`form-control block w-full bg-gray-800 text-gray-50 mt-1 px-3 py-2 border border-gray-900 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150`" type="text" id="emailLogin" :placeholder="emailAddressLabel" v-model="email">
+            <input class="`form-control block w-full bg-gray-800 text-gray-50 mt-1 px-3 py-2 border border-gray-900 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150`" type="text" id="emailLoginAubert" :placeholder="emailAddressLabel" v-model="email">
           </div>
 
           <div class="mb-6">
-            <input class="`form-control block w-full bg-gray-800 text-gray-50 mt-1 px-3 py-2 border border-gray-900 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150`" type="password" id="passwordLogin" :placeholder="passwordLabel" v-model="password">
+            <input class="`form-control block w-full bg-gray-800 text-gray-50 mt-1 px-3 py-2 border border-gray-900 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 ease-linear transition-all duration-150`" type="password" id="passwordLoginAubert" :placeholder="passwordLabel" v-model="password">
           </div>
 
           <!-- <div class="flex justify-between items-center mb-6">

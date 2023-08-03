@@ -9,7 +9,7 @@
     <div class="px-10">
         <div class="w-full my-4">
             <label class="text-md font-medium text-gray-50"> {{ nameLabel }} </label> 
-            <input :class="`w-full bg-gray-600 text-gray-50 mt-1 px-3 py-2 border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${ color.replace('bg', 'ring')} ease-linear transition-all duration-150`" type="text" :placeholder="namePlaceholder" v-model="name">
+            <input :class="`w-full bg-gray-600 text-gray-50 mt-1 px-3 py-2 border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${ color.replace('bg', 'ring')} ease-linear transition-all duration-150`" type="text" id="addNameAubert" :placeholder="namePlaceholder" v-model="name">
         </div>
         
         <div class="w-full my-4">
@@ -21,7 +21,7 @@
         <div class="w-full my-4">
             <button :class="`${ color } text-white mr-3 mb-1 px-3 py-2 rounded-full p-ripple`" @click="copyClipboardUsername" v-ripple> <i class=" pi pi-user p-button-icon"></i> </button>
             <label class="text-md font-medium text-gray-50">{{ usernameLabel }}</label>
-            <input :class="`w-full bg-gray-600 text-gray-50 px-3 py-2 border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${color.replace('bg', 'ring')} ease-linear transition-all duration-150`" type="text" ref="username" placeholder="example@gmail.com" v-model="username">
+            <input :class="`w-full bg-gray-600 text-gray-50 px-3 py-2 border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${color.replace('bg', 'ring')} ease-linear transition-all duration-150`" type="text" ref="username" id="addPasswordAubert" placeholder="example@gmail.com" v-model="username">
         </div>
 
         <div class="w-full my-4">
@@ -29,7 +29,13 @@
             <label class="text-md font-medium text-gray-50">{{ passwordLabel }}</label>
 
             <div class="flex justify-end items-center relative" v-tooltip.top="{ value: viewToAble, disabled: true }">
+                
                 <input :class="`w-full bg-gray-600 text-gray-50 px-3 py-2 pr-14 border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${color.replace('bg', 'ring')} ease-linear transition-all duration-150`" :disabled="typeTextPassword === 'password'" :type="typeTextPassword" :placeholder="passwordPlaceholder" v-model="secret">
+                
+                <div class="absolute inset-y-0 right-3 flex items-center pr-9" v-if="loading">
+                    <ProgressSpinner style="width: 40px; height: 40px" strokeWidth="6" animationDuration=".5s" fill="rgba(214, 214, 214, 0.149)" />
+                </div>
+
                 <div class="absolute inset-y-0 right-0 flex items-center pr-9" @click="passwordVisible">
                     <i :class="`pi ${visiblePasswordIcon} p-button-icon absolute text-gray-50`" v-tooltip.top="{ value: visiblePasswordIcon === 'pi-eye' ? showPassword : hidePassword, class: 'custom-error' }"></i>
                 </div>
@@ -130,9 +136,11 @@ export default {
             passwordFailedMessage: 'no',
             passwordDeletedTitle: 'no',
             viewToAble: 'no',
+            copiedToClipboard: 'no',
             visiblePasswordIcon: 'pi-eye',
             typeTextPassword: 'password',
             altIcon: false,
+            loading: false,
         }
     },
   methods: {
@@ -162,13 +170,16 @@ export default {
       this.passwordFailedTitle = getWord(this.selectedLang, "passwordFailedTitle");
       this.passwordDeletedTitle = getWord(this.selectedLang, "passwordDeletedTitle");
       this.viewToAble = getWord(this.selectedLang, "viewToAble");
+      this.copiedToClipboard = getWord(this.selectedLang, "copiedToClipboard");
     },
     async passwordVisible() {
         if (this.visiblePasswordIcon === 'pi-eye') {
+            this.loading = true;
             const secret = await getDecryptedPassword(this.id);
             this.secret = secret;
             this.visiblePasswordIcon = 'pi-eye-slash';
             this.typeTextPassword = 'text';
+            this.loading = false;
         } else {
             this.visiblePasswordIcon = 'pi-eye';
             this.typeTextPassword = 'password';
@@ -182,11 +193,12 @@ export default {
         }
     },
     async copyClipboard() {
+        this.loading = true;
         const secret = await getDecryptedPassword(this.id);
 
-        console.log("puto jajaja", secret)
-
         navigator.clipboard.writeText(secret);
+        this.loading = false;
+        this.$toast.add({severity:'success', summary: this.copiedToClipboard, life: 3000});
     },
     copyClipboardUsername() {
         navigator.clipboard.writeText(this.username);
