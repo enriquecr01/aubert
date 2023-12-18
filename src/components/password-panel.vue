@@ -9,7 +9,7 @@
     <div class="px-10">
         <div class="w-full my-4">
             <label class="text-md font-medium text-gray-50"> {{ nameLabel }} </label> 
-            <input :class="`w-full bg-gray-600 text-gray-50 mt-1 px-3 py-2 border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${ color.replace('bg', 'ring')} ease-linear transition-all duration-150`" type="text" id="addNameAubert" :placeholder="namePlaceholder" v-model="name">
+            <input :class="`w-full bg-gray-600 text-gray-50 mt-1 px-3 py-2 border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${ color.replace('bg', 'ring')} ease-linear transition-all duration-150`" type="text" :placeholder="namePlaceholder" v-model="name">
         </div>
         
         <div class="w-full my-4">
@@ -21,7 +21,7 @@
         <div class="w-full my-4">
             <button :class="`${ color } text-white mr-3 mb-1 px-3 py-2 rounded-full p-ripple`" @click="copyClipboardUsername" v-ripple> <i class=" pi pi-user p-button-icon"></i> </button>
             <label class="text-md font-medium text-gray-50">{{ usernameLabel }}</label>
-            <input :class="`w-full bg-gray-600 text-gray-50 px-3 py-2 border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${color.replace('bg', 'ring')} ease-linear transition-all duration-150`" type="text" ref="username" id="addPasswordAubert" placeholder="example@gmail.com" v-model="username">
+            <input :class="`w-full bg-gray-600 text-gray-50 px-3 py-2 border border-gray-700 rounded focus:outline-none focus:border-transparent focus:ring-2 focus:${color.replace('bg', 'ring')} ease-linear transition-all duration-150`" type="text" ref="username" placeholder="example@gmail.com" v-model="username">
         </div>
 
         <div class="w-full my-4">
@@ -249,6 +249,7 @@ export default {
         
         this.visiblePasswordIcon = 'pi-eye';
         this.typeTextPassword = 'password';
+        this.altIcon = false;
     },
     putValueURL() {
         this.altIcon = false;
