@@ -38,7 +38,7 @@
 
           <div class="text-center lg:text-left">
 
-            <button :disabled="loading" :class="`${buttonClass} text-white font-medium m-1 px-7 py-3 rounded p-ripple`" v-ripple @click="attemptLogin">
+            <button :disabled="loading" :class="`${buttonClass} text-white font-medium m-1 px-7 py-3 rounded p-ripple cursor-login`" v-ripple @click="attemptLogin">
               <i class="pi pi-spin pi-spinner" v-if="loading"></i>
               
               {{loginLabel}}
@@ -135,5 +135,9 @@ export default {
 <style scoped>
     .h-90vh{
         height: 90vh;
+    }
+
+    .cursor-login {
+      cursor: url("../assets/cursor-sesion.png") , default !important;
     }
 </style>
