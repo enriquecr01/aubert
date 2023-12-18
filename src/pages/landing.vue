@@ -4,7 +4,7 @@
 
     <section class="text-gray-400 bg-gray-700 body-font">
       <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col h-90vh">
-        <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero" src="../assets/landing-aubert.png" />
+        <img class="background-pattern lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero" src="../assets/landing-aubert.png" />
         <div class="text-center lg:w-2/3 w-full">
           <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">
             {{ titleLandingHeader }}
@@ -75,5 +75,22 @@ export default {
 <style>
     .h-90vh{
         height: 90vh;
+    }
+
+    .background-pattern {
+      background: url('./../assets/pattern.png');
+      perspective: 1000px;
+      perspective-origin: 50% 50%;
+      background-size: 80px;
+      animation: animate 2s linear infinite;
+    }
+
+    @keyframes animate {
+      from {
+        background-position: -80px -80px;
+      }
+      to {
+        background-position: 0 0;
+      }
     }
 </style>
