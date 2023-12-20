@@ -4,10 +4,8 @@
   "private": true,
   "scripts": {
     // use set on windows or use export to linux or mac 
-    "serve": "vue-cli-service serve",
-    // "serve": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
-    // "build": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build",
-    "build": "vue-cli-service build",
+    "serve": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
