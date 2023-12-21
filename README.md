@@ -1,4 +1,15 @@
-# aubert
+# Aubert - Your memorizer of passwords favorite.
+![enter image description here](https://enriquechavezr.com/wp-content/uploads/2023/12/Auber1.png)
+
+## Project Objective
+Aubert stores and encrypts with his own encryption your passwords.
+
+## Features
+
+ - Stores passwords and encrypts them.
+ - Ability to save notes. 
+ - Use encryption made by me. 
+ - Simple to use.
 
 ## Project setup
 ```
@@ -19,6 +30,3 @@ npm run build
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
